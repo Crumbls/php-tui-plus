@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Text\Title;
-use PhpTui\Tui\Widget\Borders;
-use PhpTui\Tui\Widget\HorizontalAlignment;
-use PhpTui\Tui\Widget\VerticalAlignment;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Text\Title;
+use Crumbls\Tui\Widget\Borders;
+use Crumbls\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\VerticalAlignment;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class BlockRenderer implements WidgetRenderer
 {

@@ -2,47 +2,39 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\BlockWidget;
+use Crumbls\Tui\Extension\Core\Widget\CompositeWidget;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
+use Crumbls\Tui\Extension\Core\Widget\ScrollbarWidget;
+use Crumbls\Tui\Widget\Borders;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\CompositeWidget;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
-use PhpTui\Tui\Extension\Core\Widget\ScrollbarWidget;
-use PhpTui\Tui\Widget\Borders;
+test('composite', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+    render($buffer, CompositeWidget::fromWidgets(
+        BlockWidget::default()->borders(Borders::ALL),
+        ScrollbarWidget::default()->state(new ScrollbarState(20, 5, 5)),
+    ));
 
-final class CompositeRendererTest extends WidgetTestCase
-{
-    public function testComposite(): void
-    {
-        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
-        $this->render($buffer, CompositeWidget::fromWidgets(
-            BlockWidget::default()->borders(Borders::ALL),
-            ScrollbarWidget::default()->state(new ScrollbarState(20, 5, 5)),
-        ));
+    expect($buffer->toLines())->toEqual([
+        '▲───┐',
+        '█   │',
+        '║   │',
+        '║   │',
+        '▼───┘',
+    ]);
+});
 
-        self::assertEquals([
-            '▲───┐',
-            '█   │',
-            '║   │',
-            '║   │',
-            '▼───┘',
-        ], $buffer->toLines());
-    }
+test('no widgets', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+    render($buffer, CompositeWidget::fromWidgets());
 
-    public function testNoWidgets(): void
-    {
-        $buffer = Buffer::empty(Area::fromDimensions(5, 5));
-        $this->render($buffer, CompositeWidget::fromWidgets(
-        ));
-
-        self::assertEquals([
-            '     ',
-            '     ',
-            '     ',
-            '     ',
-            '     ',
-        ], $buffer->toLines());
-    }
-}
+    expect($buffer->toLines())->toEqual([
+        '     ',
+        '     ',
+        '     ',
+        '     ',
+        '     ',
+    ]);
+});

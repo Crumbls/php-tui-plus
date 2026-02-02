@@ -2,99 +2,52 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Style;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Style\Modifier;
+use Crumbls\Tui\Text\Span;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Style\Modifier;
-use PhpTui\Tui\Text\Span;
-use PHPUnit\Framework\TestCase;
+test('fg bg', function (): void {
+    $span = Span::fromString('Hello')->fg(AnsiColor::Blue)->bg(AnsiColor::Red);
 
-final class StyleableTest extends TestCase
-{
-    public function testFgBg(): void
-    {
-        $span = Span::fromString('Hello')->fg(AnsiColor::Blue)->bg(AnsiColor::Red);
+    expect($span->style->fg)->toBe(AnsiColor::Blue);
+    expect($span->style->bg)->toBe(AnsiColor::Red);
+});
 
-        self::assertSame(AnsiColor::Blue, $span->style->fg);
-        self::assertSame(AnsiColor::Red, $span->style->bg);
-    }
+dataset('modifiers', [
+    [Modifier::BOLD, 'bold'],
+    [Modifier::DIM, 'dim'],
+    [Modifier::ITALIC, 'italic'],
+    [Modifier::UNDERLINED, 'underlined'],
+    [Modifier::SLOWBLINK, 'slowBlink'],
+    [Modifier::RAPIDBLINK, 'rapidBlink'],
+    [Modifier::REVERSED, 'reversed'],
+    [Modifier::HIDDEN, 'hidden'],
+    [Modifier::CROSSEDOUT, 'crossedOut'],
+]);
 
-    /**
-     * @dataProvider modifierProvider
-     */
-    public function testModifiers(int $modifier, string $methodName): void
-    {
-        /**
-         * @var Span $span
-         * @phpstan-ignore-next-line
-         */
-        $span = Span::fromString('Hello')->$methodName();
-        self::assertTrue(($span->style->addModifiers & $modifier) === $modifier);
+test('modifiers add', function (int $modifier, string $methodName): void {
+    $span = Span::fromString('Hello')->$methodName();
+    expect(($span->style->addModifiers & $modifier) === $modifier)->toBeTrue();
+})->with('modifiers');
 
-        /**
-         * @var Span $span
-         * @phpstan-ignore-next-line
-         */
-        $span = Span::fromString('Hello')->$methodName(false);
-        self::assertTrue(($span->style->subModifiers & $modifier) === $modifier);
-    }
+test('modifiers remove', function (int $modifier, string $methodName): void {
+    $span = Span::fromString('Hello')->$methodName(false);
+    expect(($span->style->subModifiers & $modifier) === $modifier)->toBeTrue();
+})->with('modifiers');
 
-    /**
-     * @dataProvider colorProvider
-     */
-    public function testFgColors(AnsiColor $color, string $colorName): void
-    {
-        $methodName = lcfirst($colorName);
+dataset('colors', array_map(
+    static fn (AnsiColor $color): array => [$color, $color->name],
+    array_filter(AnsiColor::cases(), static fn (AnsiColor $color): bool => $color !== AnsiColor::Reset)
+));
 
-        /**
-         * @var Span $span
-         * @phpstan-ignore-next-line
-         */
-        $span = Span::fromString('Hello')->$methodName();
-        self::assertSame($color, $span->style->fg);
-    }
+test('fg colors', function (AnsiColor $color, string $colorName): void {
+    $methodName = lcfirst($colorName);
+    $span = Span::fromString('Hello')->$methodName();
+    expect($span->style->fg)->toBe($color);
+})->with('colors');
 
-    /**
-     * @dataProvider colorProvider
-     */
-    public function testBgColors(AnsiColor $color, string $colorName): void
-    {
-        $methodName = sprintf('on%s', $colorName);
-
-        /**
-         * @var Span $span
-         * @phpstan-ignore-next-line
-         */
-        $span = Span::fromString('Hello')->$methodName();
-        self::assertSame($color, $span->style->bg);
-    }
-
-    /**
-     * @return array<array{int-mask-of<Modifier::*>, string}>
-     */
-    public static function modifierProvider(): array
-    {
-        return [
-            [Modifier::BOLD, 'bold'],
-            [Modifier::DIM, 'dim'],
-            [Modifier::ITALIC, 'italic'],
-            [Modifier::UNDERLINED, 'underlined'],
-            [Modifier::SLOWBLINK, 'slowBlink'],
-            [Modifier::RAPIDBLINK, 'rapidBlink'],
-            [Modifier::REVERSED, 'reversed'],
-            [Modifier::HIDDEN, 'hidden'],
-            [Modifier::CROSSEDOUT, 'crossedOut'],
-        ];
-    }
-
-    /**
-     * @return array<array{AnsiColor, string}>
-     */
-    public static function colorProvider(): array
-    {
-        return array_map(
-            static fn (AnsiColor $color): array => [$color, $color->name],
-            array_filter(AnsiColor::cases(), static fn (AnsiColor $color): bool => $color !== AnsiColor::Reset)
-        );
-    }
-}
+test('bg colors', function (AnsiColor $color, string $colorName): void {
+    $methodName = sprintf('on%s', $colorName);
+    $span = Span::fromString('Hello')->$methodName();
+    expect($span->style->bg)->toBe($color);
+})->with('colors');

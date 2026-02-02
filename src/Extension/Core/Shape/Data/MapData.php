@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Shape\Data;
+namespace Crumbls\Tui\Extension\Core\Shape\Data;
 
 final class MapData
 {

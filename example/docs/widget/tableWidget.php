@@ -1,11 +1,11 @@
 
 <?php
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
-use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Layout\Constraint;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\Table\TableCell;
+use Crumbls\Tui\Extension\Core\Widget\Table\TableRow;
+use Crumbls\Tui\Extension\Core\Widget\TableWidget;
+use Crumbls\Tui\Layout\Constraint;
 
 require 'vendor/autoload.php';
 

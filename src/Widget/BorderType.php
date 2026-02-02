@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Widget;
+namespace Crumbls\Tui\Widget;
 
-use PhpTui\Tui\Symbol\LineSet;
+use Crumbls\Tui\Symbol\LineSet;
 
 enum BorderType
 {

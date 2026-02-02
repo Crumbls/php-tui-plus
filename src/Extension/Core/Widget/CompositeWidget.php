@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\Widget;
 
 /**
  * Render multiple widgets to the same area.

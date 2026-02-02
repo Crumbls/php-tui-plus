@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Text\LineComposer;
-use PhpTui\Tui\Text\LineComposer\LineTruncator;
-use PhpTui\Tui\Text\LineComposer\WordWrapper;
-use PhpTui\Tui\Text\Span;
-use PhpTui\Tui\Text\StyledGrapheme;
-use PhpTui\Tui\Widget\HorizontalAlignment;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\Paragraph\Wrap;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Text\Line;
+use Crumbls\Tui\Text\LineComposer;
+use Crumbls\Tui\Text\LineComposer\LineTruncator;
+use Crumbls\Tui\Text\LineComposer\WordWrapper;
+use Crumbls\Tui\Text\Span;
+use Crumbls\Tui\Text\StyledGrapheme;
+use Crumbls\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class ParagraphRenderer implements WidgetRenderer
 {

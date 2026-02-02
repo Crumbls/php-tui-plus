@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Table;
+namespace Crumbls\Tui\Extension\Core\Widget\Table;
 
 final class TableState
 {

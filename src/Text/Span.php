@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Text;
+namespace Crumbls\Tui\Text;
 
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Style\Styleable;
-use PhpTui\Tui\Style\StyleableTrait;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Style\Styleable;
+use Crumbls\Tui\Style\StyleableTrait;
 use Stringable;
 
 final class Span implements Stringable, Styleable

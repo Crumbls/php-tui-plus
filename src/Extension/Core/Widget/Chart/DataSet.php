@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Chart;
+namespace Crumbls\Tui\Extension\Core\Widget\Chart;
 
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Style\Style;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Style\Style;
 
 final class DataSet
 {

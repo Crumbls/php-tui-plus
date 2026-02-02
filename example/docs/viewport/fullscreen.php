@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Widget\Borders;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\BlockWidget;
+use Crumbls\Tui\Widget\Borders;
 
 require 'vendor/autoload.php';
 

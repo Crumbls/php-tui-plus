@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Style;
+namespace Crumbls\Tui\Style;
 
 use InvalidArgumentException;
 

@@ -2,134 +2,125 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
+use Crumbls\Tui\Canvas\CanvasContext;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Shape\MapResolution;
+use Crumbls\Tui\Extension\Core\Shape\MapShape;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
 
-use Generator;
-use PhpTui\Tui\Canvas\CanvasContext;
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Shape\MapResolution;
-use PhpTui\Tui\Extension\Core\Shape\MapShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
+test('map low resolution', function (): void {
+    $expected = [
+        '                                                                                ',
+        '                   ••••••• •• •• •• •                                           ',
+        '            ••••••••••••••       •••      ••••  •••  ••    ••••                 ',
+        '            ••••••••••••••••     ••                ••• ••••••• •• •• •••        ',
+        '• • •• •••••• •••••••••••• ••   •••  •    •••••  •••••••••          ••  • • • • ',
+        '•••••       ••••  •••••••• •• ••  •••    •••• ••••    •• •                    • ',
+        '   ••••••••  ••••••• •••••  •••       ••••••••                        • •••••   ',
+        '  •• ••   ••    •••••••  ••          ••• ••••                        ••    •    ',
+        '•••       •••    •••••• ••••         ••••                             •• •   •• ',
+        '            •      •••••••••          ••  •   ••• • •• ••            ••         ',
+        '            • •     ••••             •• ••••••••• •••   •         • • ••        ',
+        '            •         •               ••••• ••••  ••             ••••••         ',
+        '             •      ••               •   • •• •                  •••••          ',
+        '              ••  •• •              •         ••  ••              •             ',
+        '    ••        •••   •••            •           •  •••••    •   •••              ',
+        '     •           •••• •••                       •   •  •    •  • ••             ',
+        '                  •••• •           •            •• •     •  ••   ••             ',
+        '                     ••• ••         •           • •     ••   ••• •••            ',
+        '                      •    •        • •• •              •   •   •  •            ',
+        '                   •  •     •            •    • •            ••• •  •           ',
+        '                     •        •           •   •              •• •   • •         ',
+        '                               •                •              ••   ••• •       ',
+        ' •                    •       •           •     • •                • •          ',
+        '                        •                 •    • ••               •  • •   •  • ',
+        '                              •                •                •       •       ',
+        '                       •    •                 •  •              •        •      ',
+        '                       •   ••              • •                  • • ••       •  ',
+        '                       •  •                •                         ••••    •• ',
+        '                       • •                                             ••   ••• ',
+        '                       ••                                                   •   ',
+        '                       •• •                                                     ',
+        '                       ••                                                       ',
+        '                                                                                ',
+        '                        •••                        •      •••• • • •• •         ',
+        '                       ••••           •••••• •••••• ••••••             • •••    ',
+        '         •• •••••• ••••• ••      • ••• •                                   ••   ',
+        '•  •••••             ••  •• ••••••                                         • •• ',
+        '•    •                 •   •  •                                             • • ',
+        '       •                                                                        ',
+        '                                                                                ',
+    ];
 
-final class MapShapeTest extends ShapeTestCase
-{
-    /**
-     * @param array<int,string> $expected
-     * @dataProvider provideMap
-     */
-    public function testMap(MapResolution $resolution, Marker $marker, array $expected): void
-    {
-        $canvas = CanvasWidget::default()
-            ->marker($marker)
-            ->xBounds(AxisBounds::new(-180, 180))
-            ->yBounds(AxisBounds::new(-90, 90))
-            ->paint(static function (CanvasContext $context) use ($resolution): void {
-                $context->draw(MapShape::default()->resolution($resolution));
-            });
-        $area = Area::fromDimensions(80, 40);
-        $buffer = Buffer::empty($area);
-        $this->render($buffer, $canvas);
-        self::assertEquals($expected, $buffer->toLines());
-    }
-    /**
-     * @return Generator<string,array{MapResolution,Marker,array<int,string>}>
-     */
-    public static function provideMap(): Generator
-    {
-        yield 'low' => [
-            MapResolution::Low,
-            Marker::Dot,
-            [
-            '                                                                                ',
-            '                   ••••••• •• •• •• •                                           ',
-            '            ••••••••••••••       •••      ••••  •••  ••    ••••                 ',
-            '            ••••••••••••••••     ••                ••• ••••••• •• •• •••        ',
-            '• • •• •••••• •••••••••••• ••   •••  •    •••••  •••••••••          ••  • • • • ',
-            '•••••       ••••  •••••••• •• ••  •••    •••• ••••    •• •                    • ',
-            '   ••••••••  ••••••• •••••  •••       ••••••••                        • •••••   ',
-            '  •• ••   ••    •••••••  ••          ••• ••••                        ••    •    ',
-            '•••       •••    •••••• ••••         ••••                             •• •   •• ',
-            '            •      •••••••••          ••  •   ••• • •• ••            ••         ',
-            '            • •     ••••             •• ••••••••• •••   •         • • ••        ',
-            '            •         •               ••••• ••••  ••             ••••••         ',
-            '             •      ••               •   • •• •                  •••••          ',
-            '              ••  •• •              •         ••  ••              •             ',
-            '    ••        •••   •••            •           •  •••••    •   •••              ',
-            '     •           •••• •••                       •   •  •    •  • ••             ',
-            '                  •••• •           •            •• •     •  ••   ••             ',
-            '                     ••• ••         •           • •     ••   ••• •••            ',
-            '                      •    •        • •• •              •   •   •  •            ',
-            '                   •  •     •            •    • •            ••• •  •           ',
-            '                     •        •           •   •              •• •   • •         ',
-            '                               •                •              ••   ••• •       ',
-            ' •                    •       •           •     • •                • •          ',
-            '                        •                 •    • ••               •  • •   •  • ',
-            '                              •                •                •       •       ',
-            '                       •    •                 •  •              •        •      ',
-            '                       •   ••              • •                  • • ••       •  ',
-            '                       •  •                •                         ••••    •• ',
-            '                       • •                                             ••   ••• ',
-            '                       ••                                                   •   ',
-            '                       •• •                                                     ',
-            '                       ••                                                       ',
-            '                                                                                ',
-            '                        •••                        •      •••• • • •• •         ',
-            '                       ••••           •••••• •••••• ••••••             • •••    ',
-            '         •• •••••• ••••• ••      • ••• •                                   ••   ',
-            '•  •••••             ••  •• ••••••                                         • •• ',
-            '•    •                 •   •  •                                             • • ',
-            '       •                                                                        ',
-            '                                                                                ',
-            ]
-        ];
-        yield 'high' => [
-            MapResolution::High,
-            Marker::Braille,
-            [
-            '                                                                                ',
-            '                  ⢀⣠⠤⠤⠤⠔⢤⣤⡄⠤⡠⣄⠢⠂⢢⠰⣠⡄⣀⡀                      ⣀                   ',
-            '            ⢀⣀⡤⣦⠲⢶⣿⣮⣿⡉⣰⢶⢏⡂        ⢀⣟⠁     ⢺⣻⢿⠏   ⠈⠉⠁ ⢀⣀    ⠈⠓⢳⣢⣂⡀               ',
-            '            ⡞⣳⣿⣻⡧⣷⣿⣿⢿⢿⣧⡀⠉⠉⠙⢆      ⣰⠇               ⣠⠞⠃⢉⣄⣀⣠⠴⠊⠉⠁ ⠐⠾⠤⢤⠤⡄⠐⣻⠜⢓⠂      ',
-            '⢍ ⢀⡴⠊⠙⠓⠒⠒⠤⠖⠺⠿⠽⣷⣬⢬⣾⣷⢻⣷⢲⢲⣍⠱⡀ ⠹⡗   ⢀⢐⠟        ⡔⠒⠉⠲⠤⢀⢄⡀⢩⣣⠦⢷⢼⡏⠈          ⠉⠉⠉ ⠈⠈⠉⠖⠤⠆⠒⠭',
-            '⠶⢽⡲⣽⡆             ⠈⣠⣽⣯⡼⢯⣘⡯⠃⠘⡆ ⢰⠒⠁ ⢾⣚⠟    ⢀⠆ ⣔⠆ ⢷⠾⠋⠁    ⠙⠁                     ⠠⡤',
-            '  ⠠⢧⣄⣀⡶⠦⠤⡀        ⢰⡁ ⠉⡻⠙⣎⡥  ⠘⠲⠇       ⢀⡀⠨⣁⡄⣸⢫⡤⠄                        ⣀⢠⣤⠊⣼⠅⠖⠋⠁',
-            '   ⣠⠾⠛⠁  ⠈⣱        ⠋⠦⢤⡼ ⠈⠈⠦⡀         ⢀⣿⣇ ⢹⣷⣂⡞⠃                       ⢀⣂⡀  ⠏⣜    ',
-            '          ⠙⣷⡄        ⠘⠆ ⢀⣀⡠⣗         ⠘⣻⣽⡟⠉⠈                           ⢹⡇  ⠟⠁    ',
-            '           ⠈⡟           ⢎⣻⡿⠾⠇         ⠘⠇  ⣀⡀  ⣤⣤⡆ ⡠⡦                 ⢀⠎⡏        ',
-            '            ⡇          ⣀⠏⠋           ⢸⠒⢃⡖⢻⢟⣷⣄⣰⣡⠥⣱ ⢏⣧              ⣀ ⡴⠚⢰⠟        ',
-            '            ⢳         ⢸⠃             ⠸⣄⣼⣠⢼⡴⡟⢿⢿⣀⣄  ⠸⡹             ⠘⡯⢿⡇⡠⢼⠁        ',
-            '             ⢳⣀      ⢀⠞⠁             ⢠⠋⠁ ⠐⠧⡄⣬⣉⣈⡽                  ⢧⠘⢽⠟⠉         ',
-            '              ⣿⣄  ⡴⠚⠛⣿⣀             ⢠⠖     ⠈⠁ ⠹⣧  ⢾⣄⡀             ⡼ ⠈           ',
-            '    ⣀         ⠘⣿⡄ ⡇  ⣘⣻             ⡏          ⢻⡄ ⠘⠿⢿⠒⠲⡀   ⢀⡀   ⢀⡰⣗             ',
-            '    ⠉⠷          ⢫⡀⢧⡼⡟⠉⣛⣳⣦⡀         ⠈⡇          ⠸⣱  ⢀⡼  ⢺  ⡸⠉⢇  ⣾⡏ ⣁             ',
-            '                 ⠉⠒⢆⡓⡆             ⠠⡃           ⢳⣇⡠⠏   ⠐⡄⡞  ⠘⣇⡀⢱  ⣾⡀            ',
-            '                    ⢹⣇⣀⣾⡷⠤⡆         ⢣            ⠯⢺⠇    ⢣⣅   ⣽⢱⡔ ⢠⢿⣗            ',
-            '                     ⠙⢱   ⠘⠦⡄       ⠈⢦⡠⣠⢶⣀        ⡜     ⠈⠿  ⢠⣽⢆ ⢀⣼⡜⠿            ',
-            '                     ⢀⡞     ⢱⡀           ⢸       ⡔⠁          ⢻⢿⢰⠏⢸⣤⣴⣆           ',
-            '                     ⢘⠆      ⠙⠢⢄         ⠸⡀     ⡸⠁           ⠈⣞⡎⠥⡟⣿⠠⠿⣷⠒⢤⢀⣆      ',
-            '                     ⠘⠆        ⢈⠂         ⢳     ⡇             ⠈⠳⠶⣤⣭⣠ ⠋⢧⡬⣟⠉⠷⡄    ',
-            '                      ⢨        ⡜          ⢸     ⠸ ⣠               ⠁⢁⣰⢶ ⡇⠉⠁ ⠛    ',
-            '⠆                     ⠈⢱⡀      ⡆          ⡇    ⢀⡜⡴⢹               ⢰⠏⠁⠘⢶⠹⡀   ⠸ ⢠⡶',
-            '                        ⠅     ⣸           ⢸    ⢫ ⡞⡊             ⢠⠔⠋     ⢳⡀ ⠐⣦   ',
-            '                        ⡅    ⡏            ⠈⡆  ⢠⠎ ⠳⠃             ⢸        ⢳      ',
-            '                       ⠨    ⡸⠁             ⢱  ⡸                 ⠈⡇ ⢀⣀⡀   ⢸      ',
-            '                       ⠸  ⠐⡶⠁              ⠘⠖⠚                   ⠣⠒⠋ ⠱⣇ ⢀⠇   ⠰⡄ ',
-            '                       ⠽ ⣰⡖⠁                                          ⠘⢚⡊    ⢀⣿⠇',
-            '                       ⡯⢀⡟                                             ⠘⠏   ⢠⢾⠃ ',
-            '                       ⠇⢨⠆                            ⢠⡄                    ⠈⠁  ',
-            '                       ⢧⣷⡀⠚                                                     ',
-            '                        ⠉⠁                                                      ',
-            '                          ⢀⡀                                                    ',
-            '                        ⢠⡾⠋                      ⣀⡠⠖⢦⣀⣀  ⣀⠤⠦⢤⠤⠶⠤⠖⠦⠤⠤⠤⠴⠤⢤⣄       ',
-            '                ⢀⣤⣀ ⡀  ⣼⣻⠙⡆         ⢀⡤⠤⠤⠴⠒⠖⠒⠒⠒⠚⠉⠋⠁    ⢰⡳⠊⠁              ⠈⠉⠉⠒⠤⣤  ',
-            '    ⢀⣀⣀⡴⠖⠒⠒⠚⠛⠛⠛⠒⠚⠳⠉⠉⠉⠉⢉⣉⡥⠔⠃     ⢀⣠⠤⠴⠃                                      ⢠⠞⠁  ',
-            '   ⠘⠛⣓⣒⠆              ⠸⠥⣀⣤⡦⠠⣞⣭⣇⣘⠿⠆                                         ⣖⠛   ',
-            '⠶⠔⠲⠤⠠⠜⢗⠤⠄                 ⠘⠉  ⠁                                            ⠈⠉⠒⠔⠤',
-            '                                                                                ',
-            ]
-        ];
-    }
-}
+    $canvas = CanvasWidget::default()
+        ->marker(Marker::Dot)
+        ->xBounds(AxisBounds::new(-180, 180))
+        ->yBounds(AxisBounds::new(-90, 90))
+        ->paint(static function (CanvasContext $context): void {
+            $context->draw(MapShape::default()->resolution(MapResolution::Low));
+        });
+    $area = Area::fromDimensions(80, 40);
+    $buffer = Buffer::empty($area);
+    render($buffer, $canvas);
+    expect($buffer->toLines())->toBe($expected);
+});
+
+test('map high resolution', function (): void {
+    $expected = [
+        '                                                                                ',
+        '                  ⢀⣠⠤⠤⠤⠔⢤⣤⡄⠤⡠⣄⠢⠂⢢⠰⣠⡄⣀⡀                      ⣀                   ',
+        '            ⢀⣀⡤⣦⠲⢶⣿⣮⣿⡉⣰⢶⢏⡂        ⢀⣟⠁     ⢺⣻⢿⠏   ⠈⠉⠁ ⢀⣀    ⠈⠓⢳⣢⣂⡀               ',
+        '            ⡞⣳⣿⣻⡧⣷⣿⣿⢿⢿⣧⡀⠉⠉⠙⢆      ⣰⠇               ⣠⠞⠃⢉⣄⣀⣠⠴⠊⠉⠁ ⠐⠾⠤⢤⠤⡄⠐⣻⠜⢓⠂      ',
+        '⢍ ⢀⡴⠊⠙⠓⠒⠒⠤⠖⠺⠿⠽⣷⣬⢬⣾⣷⢻⣷⢲⢲⣍⠱⡀ ⠹⡗   ⢀⢐⠟        ⡔⠒⠉⠲⠤⢀⢄⡀⢩⣣⠦⢷⢼⡏⠈          ⠉⠉⠉ ⠈⠈⠉⠖⠤⠆⠒⠭',
+        '⠶⢽⡲⣽⡆             ⠈⣠⣽⣯⡼⢯⣘⡯⠃⠘⡆ ⢰⠒⠁ ⢾⣚⠟    ⢀⠆ ⣔⠆ ⢷⠾⠋⠁    ⠙⠁                     ⠠⡤',
+        '  ⠠⢧⣄⣀⡶⠦⠤⡀        ⢰⡁ ⠉⡻⠙⣎⡥  ⠘⠲⠇       ⢀⡀⠨⣁⡄⣸⢫⡤⠄                        ⣀⢠⣤⠊⣼⠅⠖⠋⠁',
+        '   ⣠⠾⠛⠁  ⠈⣱        ⠋⠦⢤⡼ ⠈⠈⠦⡀         ⢀⣿⣇ ⢹⣷⣂⡞⠃                       ⢀⣂⡀  ⠏⣜    ',
+        '          ⠙⣷⡄        ⠘⠆ ⢀⣀⡠⣗         ⠘⣻⣽⡟⠉⠈                           ⢹⡇  ⠟⠁    ',
+        '           ⠈⡟           ⢎⣻⡿⠾⠇         ⠘⠇  ⣀⡀  ⣤⣤⡆ ⡠⡦                 ⢀⠎⡏        ',
+        '            ⡇          ⣀⠏⠋           ⢸⠒⢃⡖⢻⢟⣷⣄⣰⣡⠥⣱ ⢏⣧              ⣀ ⡴⠚⢰⠟        ',
+        '            ⢳         ⢸⠃             ⠸⣄⣼⣠⢼⡴⡟⢿⢿⣀⣄  ⠸⡹             ⠘⡯⢿⡇⡠⢼⠁        ',
+        '             ⢳⣀      ⢀⠞⠁             ⢠⠋⠁ ⠐⠧⡄⣬⣉⣈⡽                  ⢧⠘⢽⠟⠉         ',
+        '              ⣿⣄  ⡴⠚⠛⣿⣀             ⢠⠖     ⠈⠁ ⠹⣧  ⢾⣄⡀             ⡼ ⠈           ',
+        '    ⣀         ⠘⣿⡄ ⡇  ⣘⣻             ⡏          ⢻⡄ ⠘⠿⢿⠒⠲⡀   ⢀⡀   ⢀⡰⣗             ',
+        '    ⠉⠷          ⢫⡀⢧⡼⡟⠉⣛⣳⣦⡀         ⠈⡇          ⠸⣱  ⢀⡼  ⢺  ⡸⠉⢇  ⣾⡏ ⣁             ',
+        '                 ⠉⠒⢆⡓⡆             ⠠⡃           ⢳⣇⡠⠏   ⠐⡄⡞  ⠘⣇⡀⢱  ⣾⡀            ',
+        '                    ⢹⣇⣀⣾⡷⠤⡆         ⢣            ⠯⢺⠇    ⢣⣅   ⣽⢱⡔ ⢠⢿⣗            ',
+        '                     ⠙⢱   ⠘⠦⡄       ⠈⢦⡠⣠⢶⣀        ⡜     ⠈⠿  ⢠⣽⢆ ⢀⣼⡜⠿            ',
+        '                     ⢀⡞     ⢱⡀           ⢸       ⡔⠁          ⢻⢿⢰⠏⢸⣤⣴⣆           ',
+        '                     ⢘⠆      ⠙⠢⢄         ⠸⡀     ⡸⠁           ⠈⣞⡎⠥⡟⣿⠠⠿⣷⠒⢤⢀⣆      ',
+        '                     ⠘⠆        ⢈⠂         ⢳     ⡇             ⠈⠳⠶⣤⣭⣠ ⠋⢧⡬⣟⠉⠷⡄    ',
+        '                      ⢨        ⡜          ⢸     ⠸ ⣠               ⠁⢁⣰⢶ ⡇⠉⠁ ⠛    ',
+        '⠆                     ⠈⢱⡀      ⡆          ⡇    ⢀⡜⡴⢹               ⢰⠏⠁⠘⢶⠹⡀   ⠸ ⢠⡶',
+        '                        ⠅     ⣸           ⢸    ⢫ ⡞⡊             ⢠⠔⠋     ⢳⡀ ⠐⣦   ',
+        '                        ⡅    ⡏            ⠈⡆  ⢠⠎ ⠳⠃             ⢸        ⢳      ',
+        '                       ⠨    ⡸⠁             ⢱  ⡸                 ⠈⡇ ⢀⣀⡀   ⢸      ',
+        '                       ⠸  ⠐⡶⠁              ⠘⠖⠚                   ⠣⠒⠋ ⠱⣇ ⢀⠇   ⠰⡄ ',
+        '                       ⠽ ⣰⡖⠁                                          ⠘⢚⡊    ⢀⣿⠇',
+        '                       ⡯⢀⡟                                             ⠘⠏   ⢠⢾⠃ ',
+        '                       ⠇⢨⠆                            ⢠⡄                    ⠈⠁  ',
+        '                       ⢧⣷⡀⠚                                                     ',
+        '                        ⠉⠁                                                      ',
+        '                          ⢀⡀                                                    ',
+        '                        ⢠⡾⠋                      ⣀⡠⠖⢦⣀⣀  ⣀⠤⠦⢤⠤⠶⠤⠖⠦⠤⠤⠤⠴⠤⢤⣄       ',
+        '                ⢀⣤⣀ ⡀  ⣼⣻⠙⡆         ⢀⡤⠤⠤⠴⠒⠖⠒⠒⠒⠚⠉⠋⠁    ⢰⡳⠊⠁              ⠈⠉⠉⠒⠤⣤  ',
+        '    ⢀⣀⣀⡴⠖⠒⠒⠚⠛⠛⠛⠒⠚⠳⠉⠉⠉⠉⢉⣉⡥⠔⠃     ⢀⣠⠤⠴⠃                                      ⢠⠞⠁  ',
+        '   ⠘⠛⣓⣒⠆              ⠸⠥⣀⣤⡦⠠⣞⣭⣇⣘⠿⠆                                         ⣖⠛   ',
+        '⠶⠔⠲⠤⠠⠜⢗⠤⠄                 ⠘⠉  ⠁                                            ⠈⠉⠒⠔⠤',
+        '                                                                                ',
+    ];
+
+    $canvas = CanvasWidget::default()
+        ->marker(Marker::Braille)
+        ->xBounds(AxisBounds::new(-180, 180))
+        ->yBounds(AxisBounds::new(-90, 90))
+        ->paint(static function (CanvasContext $context): void {
+            $context->draw(MapShape::default()->resolution(MapResolution::High));
+        });
+    $area = Area::fromDimensions(80, 40);
+    $buffer = Buffer::empty($area);
+    render($buffer, $canvas);
+    expect($buffer->toLines())->toBe($expected);
+});

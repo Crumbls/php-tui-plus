@@ -2,22 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\BarChart;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\Bar;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\BarGroup;
+use Crumbls\Tui\Text\Line;
 
-use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
-use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
-use PhpTui\Tui\Text\Line;
-use PHPUnit\Framework\TestCase;
+test('from', function (): void {
+    $group = BarGroup::fromArray(['B0' => 1, 'B1' => 2]);
 
-final class BarGroupTest extends TestCase
-{
-    public function testFrom(): void
-    {
-        $group = BarGroup::fromArray(['B0' => 1, 'B1' => 2]);
-        self::assertEquals([
-            Bar::fromValue(1)->label(Line::fromString('B0')),
-            Bar::fromValue(2)->label(Line::fromString('B1')),
-        ], $group->bars);
-    }
-
-}
+    expect($group->bars)->toEqual([
+        Bar::fromValue(1)->label(Line::fromString('B0')),
+        Bar::fromValue(2)->label(Line::fromString('B1')),
+    ]);
+});

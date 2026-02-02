@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
-use PhpTui\Tui\Math\VectorUtil;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Symbol\BarSet;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
+use Crumbls\Tui\Math\VectorUtil;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Symbol\BarSet;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class SparklineRenderer implements WidgetRenderer
 {

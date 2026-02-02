@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use PhpTui\Term\Terminal;
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\DisplayBuilder;
+use Crumbls\Term\Terminal;
+use Crumbls\Tui\Bridge\PhpTerm\PhpTermBackend;
+use Crumbls\Tui\DisplayBuilder;
 
 require 'vendor/autoload.php';
 

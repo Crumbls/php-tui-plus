@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
-use PhpTui\Tui\Style\Style;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\GaugeWidget;
+use Crumbls\Tui\Style\Style;
 
 require 'vendor/autoload.php';
 

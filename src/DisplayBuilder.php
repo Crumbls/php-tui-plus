@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui;
+namespace Crumbls\Tui;
 
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Canvas\AggregateShapePainter;
-use PhpTui\Tui\Canvas\ShapePainter;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Backend;
-use PhpTui\Tui\Display\Display;
-use PhpTui\Tui\Display\DisplayExtension;
-use PhpTui\Tui\Display\Viewport;
-use PhpTui\Tui\Display\Viewport\Fixed;
-use PhpTui\Tui\Display\Viewport\Fullscreen;
-use PhpTui\Tui\Display\Viewport\Inline;
-use PhpTui\Tui\Extension\Core\CoreExtension;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
-use PhpTui\Tui\Widget\WidgetRenderer;
-use PhpTui\Tui\Widget\WidgetRenderer\AggregateWidgetRenderer;
+use Crumbls\Tui\Bridge\PhpTerm\PhpTermBackend;
+use Crumbls\Tui\Canvas\AggregateShapePainter;
+use Crumbls\Tui\Canvas\ShapePainter;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Backend;
+use Crumbls\Tui\Display\Display;
+use Crumbls\Tui\Display\DisplayExtension;
+use Crumbls\Tui\Display\Viewport;
+use Crumbls\Tui\Display\Viewport\Fixed;
+use Crumbls\Tui\Display\Viewport\Fullscreen;
+use Crumbls\Tui\Display\Viewport\Inline;
+use Crumbls\Tui\Extension\Core\CoreExtension;
+use Crumbls\Tui\Extension\Core\Widget\CanvasRenderer;
+use Crumbls\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Widget\WidgetRenderer\AggregateWidgetRenderer;
 
 /**
  * An entry point for PHP-TUI.

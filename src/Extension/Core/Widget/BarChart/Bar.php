@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\BarChart;
+namespace Crumbls\Tui\Extension\Core\Widget\BarChart;
 
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Line;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Line;
 
 final class Bar
 {

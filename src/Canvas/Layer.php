@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas;
+namespace Crumbls\Tui\Canvas;
 
-use PhpTui\Tui\Color\FgBgColor;
+use Crumbls\Tui\Color\FgBgColor;
 
 final class Layer
 {

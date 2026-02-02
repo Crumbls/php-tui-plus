@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Bridge\Cassowary;
+namespace Crumbls\Tui\Bridge\Cassowary;
 
 use PhpTui\Cassowary\Constraint;
 use PhpTui\Cassowary\Solver;
 use PhpTui\Cassowary\Strength;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Areas;
-use PhpTui\Tui\Layout\Constraint as DTLConstraint;
-use PhpTui\Tui\Layout\Constraint\LengthConstraint;
-use PhpTui\Tui\Layout\Constraint\MaxConstraint;
-use PhpTui\Tui\Layout\Constraint\MinConstraint;
-use PhpTui\Tui\Layout\Constraint\PercentageConstraint;
-use PhpTui\Tui\Layout\ConstraintSolver;
-use PhpTui\Tui\Layout\Layout;
-use PhpTui\Tui\Widget\Direction;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Areas;
+use Crumbls\Tui\Layout\Constraint as DTLConstraint;
+use Crumbls\Tui\Layout\Constraint\LengthConstraint;
+use Crumbls\Tui\Layout\Constraint\MaxConstraint;
+use Crumbls\Tui\Layout\Constraint\MinConstraint;
+use Crumbls\Tui\Layout\Constraint\PercentageConstraint;
+use Crumbls\Tui\Layout\ConstraintSolver;
+use Crumbls\Tui\Layout\Layout;
+use Crumbls\Tui\Widget\Direction;
 use RuntimeException;
 
 final class CassowaryConstraintSolver implements ConstraintSolver

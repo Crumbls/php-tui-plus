@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Bdf;
+namespace Crumbls\Tui\Extension\Bdf;
 
-use PhpTui\Tui\Display\DisplayExtension;
-use PhpTui\Tui\Extension\Bdf\Shape\TextRenderer;
+use Crumbls\Tui\Display\DisplayExtension;
+use Crumbls\Tui\Extension\Bdf\Shape\TextRenderer;
 
 final class BdfExtension implements DisplayExtension
 {

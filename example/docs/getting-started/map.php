@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\MapResolution;
-use PhpTui\Tui\Extension\Core\Shape\MapShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Shape\MapResolution;
+use Crumbls\Tui\Extension\Core\Shape\MapShape;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
 
 require 'vendor/autoload.php';
 

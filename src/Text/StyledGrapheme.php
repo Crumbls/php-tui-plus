@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Text;
+namespace Crumbls\Tui\Text;
 
-use PhpTui\Tui\Style\Style;
+use Crumbls\Tui\Style\Style;
 
 final class StyledGrapheme
 {

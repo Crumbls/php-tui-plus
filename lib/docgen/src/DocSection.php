@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Docgen;
+namespace Crumbls\Docgen;
 
 final class DocSection
 {

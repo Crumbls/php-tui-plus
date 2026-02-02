@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\ImageMagick;
+namespace Crumbls\Tui\Extension\ImageMagick;
 
-use PhpTui\Tui\Display\DisplayExtension;
-use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
-use PhpTui\Tui\Extension\ImageMagick\Widget\ImageRenderer;
+use Crumbls\Tui\Display\DisplayExtension;
+use Crumbls\Tui\Extension\ImageMagick\Shape\ImagePainter;
+use Crumbls\Tui\Extension\ImageMagick\Widget\ImageRenderer;
 
 final class ImageMagickExtension implements DisplayExtension
 {

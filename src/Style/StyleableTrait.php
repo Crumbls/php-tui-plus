@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Style;
+namespace Crumbls\Tui\Style;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\Color;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\Color;
 
 trait StyleableTrait
 {

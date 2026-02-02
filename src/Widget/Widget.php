@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Widget;
+namespace Crumbls\Tui\Widget;
 
 /**
  * Marker interface for widgets

@@ -2,163 +2,147 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Shape;
+use Crumbls\Tui\Canvas\CanvasContext;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Shape\LineShape;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
 
-use Generator;
-use PhpTui\Tui\Canvas\CanvasContext;
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Shape\LineShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
+dataset('lines', [
+    'out of bounds' => [
+        LineShape::fromScalars(-1.0, -1.0, 10.0, 10.0),
+        [
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+        ]
+    ],
+    'horizontal' => [
+        LineShape::fromScalars(0.0, 0.0, 10.0, 0.0),
+        [
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '••••••••••',
+        ]
+    ],
+    'horizontal 2' => [
+        LineShape::fromScalars(10.0, 10.0, 0.0, 10.0),
+        [
+            '••••••••••',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+        ]
+    ],
+    'vertical' => [
+        LineShape::fromScalars(0.0, 0.0, 0.0, 10.0),
+        [
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+            '•         ',
+        ]
+    ],
+    'diagonal' => [
+        LineShape::fromScalars(0.0, 0.0, 10.0, 5.0),
+        [
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '         •',
+            '       •• ',
+            '     ••   ',
+            '   ••     ',
+            ' ••       ',
+            '•         ',
+        ]
+    ],
+    'diagonal dy > dx, y1 < y2' => [
+        LineShape::fromScalars(0.0, 0.0, 5.0, 10.0),
+        [
+            '    •     ',
+            '    •     ',
+            '   •      ',
+            '   •      ',
+            '  •       ',
+            '  •       ',
+            ' •        ',
+            ' •        ',
+            '•         ',
+            '•         ',
+        ]
+    ],
+    'diagonal dy < dx, x1 < x2' => [
+        LineShape::fromScalars(10.0, 0.0, 0.0, 5.0),
+        [
+            '          ',
+            '          ',
+            '          ',
+            '          ',
+            '•         ',
+            ' ••       ',
+            '   ••     ',
+            '     ••   ',
+            '       •• ',
+            '         •',
+        ]
+    ],
+    'diagonal dy > dx, y1 > y2' => [
+        LineShape::fromScalars(0.0, 10.0, 5.0, 0.0),
+        [
+            '•         ',
+            '•         ',
+            ' •        ',
+            ' •        ',
+            '  •       ',
+            '  •       ',
+            '   •      ',
+            '   •      ',
+            '    •     ',
+            '    •     ',
+        ]
+    ],
+]);
 
-final class LineShapeTest extends ShapeTestCase
-{
-    /**
-     * @dataProvider provideLine
-     * @param array<int,string> $expected
-     */
-    public function testLine(LineShape $line, array $expected): void
-    {
-        $canvas = CanvasWidget::default()
-            ->marker(Marker::Dot)
-            ->xBounds(AxisBounds::new(0, 10))
-            ->yBounds(AxisBounds::new(0, 10))
-            ->paint(static function (CanvasContext $context) use ($line): void {
-                $context->draw($line);
-            });
-        $area = Area::fromDimensions(10, 10);
-        $buffer = Buffer::empty($area);
-        $this->render($buffer, $canvas);
-        self::assertEquals($expected, $buffer->toLines());
-    }
-    /**
-     * @return Generator<array{LineShape,array<int,string>}>
-     */
-    public static function provideLine(): Generator
-    {
-        yield 'out of bounds' => [
-            LineShape::fromScalars(-1.0, -1.0, 10.0, 10.0),
-            [
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-            ]
-        ];
-
-        yield 'horizontal' => [
-            LineShape::fromScalars(0.0, 0.0, 10.0, 0.0),
-            [
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '••••••••••',
-            ]
-        ];
-        yield 'horizontal 2' => [
-            LineShape::fromScalars(10.0, 10.0, 0.0, 10.0),
-            [
-                '••••••••••',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-            ]
-        ];
-
-        yield 'vertical' => [
-            LineShape::fromScalars(0.0, 0.0, 0.0, 10.0),
-            [
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-                '•         ',
-            ]
-        ];
-        yield 'diagonal' => [
-            LineShape::fromScalars(0.0, 0.0, 10.0, 5.0),
-            [
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '         •',
-                '       •• ',
-                '     ••   ',
-                '   ••     ',
-                ' ••       ',
-                '•         ',
-            ]
-        ];
-        yield 'diagonal dy > dx, y1 < y2' => [
-            LineShape::fromScalars(0.0, 0.0, 5.0, 10.0),
-            [
-                '    •     ',
-                '    •     ',
-                '   •      ',
-                '   •      ',
-                '  •       ',
-                '  •       ',
-                ' •        ',
-                ' •        ',
-                '•         ',
-                '•         ',
-            ]
-        ];
-        yield 'diagonal dy < dx, x1 < x2' => [
-            LineShape::fromScalars(10.0, 0.0, 0.0, 5.0),
-            [
-                '          ',
-                '          ',
-                '          ',
-                '          ',
-                '•         ',
-                ' ••       ',
-                '   ••     ',
-                '     ••   ',
-                '       •• ',
-                '         •',
-            ]
-        ];
-        yield 'diagonal dy > dx, y1 > y2' => [
-            LineShape::fromScalars(0.0, 10.0, 5.0, 0.0),
-            [
-                '•         ',
-                '•         ',
-                ' •        ',
-                ' •        ',
-                '  •       ',
-                '  •       ',
-                '   •      ',
-                '   •      ',
-                '    •     ',
-                '    •     ',
-            ]
-        ];
-    }
-}
+test('line', function (LineShape $line, array $expected): void {
+    $canvas = CanvasWidget::default()
+        ->marker(Marker::Dot)
+        ->xBounds(AxisBounds::new(0, 10))
+        ->yBounds(AxisBounds::new(0, 10))
+        ->paint(static function (CanvasContext $context) use ($line): void {
+            $context->draw($line);
+        });
+    $area = Area::fromDimensions(10, 10);
+    $buffer = Buffer::empty($area);
+    render($buffer, $canvas);
+    expect($buffer->toLines())->toBe($expected);
+})->with('lines');

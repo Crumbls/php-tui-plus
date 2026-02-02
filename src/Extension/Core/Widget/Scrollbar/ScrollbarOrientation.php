@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Scrollbar;
+namespace Crumbls\Tui\Extension\Core\Widget\Scrollbar;
 
 enum ScrollbarOrientation
 {

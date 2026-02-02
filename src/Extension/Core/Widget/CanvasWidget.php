@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
 use Closure;
-use PhpTui\Tui\Canvas\CanvasContext;
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Canvas\Shape;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Canvas\CanvasContext;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Canvas\Shape;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Widget\Widget;
 
 /**
  * The canvas widget provides a surface, of arbitrary scale, upon which shapes can be drawn.

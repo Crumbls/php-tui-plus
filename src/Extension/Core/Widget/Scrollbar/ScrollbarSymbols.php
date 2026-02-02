@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Scrollbar;
+namespace Crumbls\Tui\Extension\Core\Widget\Scrollbar;
 
-use PhpTui\Tui\Symbol\BlockSet;
-use PhpTui\Tui\Symbol\LineSet;
+use Crumbls\Tui\Symbol\BlockSet;
+use Crumbls\Tui\Symbol\LineSet;
 
 final class ScrollbarSymbols
 {

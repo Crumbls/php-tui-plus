@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\CompositeWidget;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
-use PhpTui\Tui\Extension\Core\Widget\ScrollbarWidget;
-use PhpTui\Tui\Text\Title;
-use PhpTui\Tui\Widget\Borders;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\BlockWidget;
+use Crumbls\Tui\Extension\Core\Widget\CompositeWidget;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
+use Crumbls\Tui\Extension\Core\Widget\ScrollbarWidget;
+use Crumbls\Tui\Text\Title;
+use Crumbls\Tui\Widget\Borders;
 
 require 'vendor/autoload.php';
 

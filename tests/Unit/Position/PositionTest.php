@@ -2,55 +2,35 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Position;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Position\Position;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Position\Position;
-use PHPUnit\Framework\TestCase;
+test('returns index for position', function (): void {
+    expect((new Position(5, 5))->toIndex(Area::fromScalars(0, 0, 10, 10)))->toBe(55);
+});
 
-final class PositionTest extends TestCase
-{
-    public function testReturnsIndexForPosition(): void
-    {
-        self::assertEquals(
-            55,
-            (new Position(5, 5))->toIndex(Area::fromScalars(0, 0, 10, 10))
-        );
-    }
+test('throws exception if out of range', function (): void {
+    expect(fn () => (new Position(15, 5))->toIndex(Area::fromScalars(0, 0, 10, 10)))
+        ->toThrow(OutOfBoundsException::class, 'Position (15,5) outside of area @(0,0) of 10x10 when trying to get index');
+});
 
-    public function testThrowsExceptionIfOutOfRange(): void
-    {
-        $this->expectExceptionMessage('Position (15,5) outside of area @(0,0) of 10x10 when trying to get index');
-        self::assertEquals(
-            55,
-            (new Position(15, 5))->toIndex(Area::fromScalars(0, 0, 10, 10))
-        );
-    }
+test('creates position from index', function (): void {
+    $position = Position::fromIndex(55, Area::fromScalars(0, 0, 10, 10));
+    expect($position->x)->toBe(5);
+    expect($position->y)->toBe(5);
+});
 
-    public function testCreatesPositionFromIndex(): void
-    {
-        $position = Position::fromIndex(55, Area::fromScalars(0, 0, 10, 10));
-        self::assertEquals(5, $position->x);
-        self::assertEquals(5, $position->y);
-    }
+test('throws exception if index out of range', function (): void {
+    expect(fn () => Position::fromIndex(100, Area::fromScalars(0, 0, 10, 10)))
+        ->toThrow(OutOfBoundsException::class, 'outside of area');
+});
 
-    public function testThrowsExceptionIfIndexOutOfRange(): void
-    {
-        $this->expectExceptionMessage('outside of area');
-        Position::fromIndex(100, Area::fromScalars(0, 0, 10, 10));
-    }
+test('throws exception if negative x', function (): void {
+    expect(fn () => Position::at(-1, 2))
+        ->toThrow(RuntimeException::class, 'Neither X nor Y values can be less than zero, got [-1, 2]');
+});
 
-    public function testThrowsExceptionIfNegativeX(): void
-    {
-        $this->expectExceptionMessage('Neither X nor Y values can be less than zero, got [-1, 2]');
-        /** @phpstan-ignore-next-line */
-        Position::at(-1, 2);
-    }
-
-    public function testThrowsExceptionIfNegativeY(): void
-    {
-        $this->expectExceptionMessage('Neither X nor Y values can be less than zero, got [1, -2]');
-        /** @phpstan-ignore-next-line */
-        Position::at(1, -2);
-    }
-}
+test('throws exception if negative y', function (): void {
+    expect(fn () => Position::at(1, -2))
+        ->toThrow(RuntimeException::class, 'Neither X nor Y values can be less than zero, got [1, -2]');
+});

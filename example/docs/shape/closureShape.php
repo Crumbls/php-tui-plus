@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Canvas\Painter;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\ClosureShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Text\Line;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Canvas\Painter;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Shape\ClosureShape;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Text\Line;
 
 require 'vendor/autoload.php';
 

@@ -2,20 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget\Canvas\Grid;
+use Crumbls\Tui\Canvas\Grid\HalfBlockGrid;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Position\Position;
 
-use PhpTui\Tui\Canvas\Grid\HalfBlockGrid;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Position\Position;
-use PHPUnit\Framework\TestCase;
+test('zero size', function (): void {
+    $grid = HalfBlockGrid::new(0, 0);
+    $grid->paint(Position::at(1, 1), AnsiColor::Green);
+    $layer = $grid->save();
 
-final class HalfBlockGridTest extends TestCase
-{
-    public function testZeroSize(): void
-    {
-        $grid = HalfBlockGrid::new(0, 0);
-        $grid->paint(Position::at(1, 1), AnsiColor::Green);
-        $layer = $grid->save();
-        self::assertCount(0, $layer->chars);
-    }
-}
+    expect($layer->chars)->toHaveCount(0);
+});

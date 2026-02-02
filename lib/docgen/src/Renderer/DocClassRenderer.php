@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Docgen\Renderer;
+namespace Crumbls\Docgen\Renderer;
 
-use PhpTui\Docgen\DocClass;
-use PhpTui\Docgen\DocExampleType;
-use PhpTui\Docgen\DocRenderer;
+use Crumbls\Docgen\DocClass;
+use Crumbls\Docgen\DocExampleType;
+use Crumbls\Docgen\DocRenderer;
 
 final class DocClassRenderer implements DocRenderer
 {

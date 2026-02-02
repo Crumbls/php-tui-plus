@@ -2,191 +2,188 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\List\ListItem;
+use Crumbls\Tui\Extension\Core\Widget\ListWidget;
+use Crumbls\Tui\Text\Text;
+use Crumbls\Tui\Widget\Corner;
 
-use Generator;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
-use PhpTui\Tui\Extension\Core\Widget\ListWidget;
-use PhpTui\Tui\Text\Text;
-use PhpTui\Tui\Widget\Corner;
+test('simple', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+    render($buffer, ListWidget::default()
+        ->items(
+            ListItem::new(Text::fromString('Hello')),
+            ListItem::new(Text::fromString('World')),
+        ));
 
-final class ListRendererTest extends WidgetTestCase
-{
-    /**
-     * @dataProvider provideRenderList
-     * @param array<int,string> $expected
-     */
-    public function testRenderList(Area $area, ListWidget $itemList, array $expected): void
-    {
-        $buffer = Buffer::empty($area);
-        $this->render($buffer, $itemList);
-        self::assertEquals($expected, $buffer->toLines());
-    }
-    /**
-     * @return Generator<array{Area,ListWidget,array<int,string>}>
-     */
-    public static function provideRenderList(): Generator
-    {
-        yield 'simple' => [
-            Area::fromDimensions(5, 5),
-            ListWidget::default()
-                ->items(
-                    ListItem::new(Text::fromString('Hello')),
-                    ListItem::new(Text::fromString('World')),
-                ),
-            [
-                'Hello',
-                'World',
-                '     ',
-                '     ',
-                '     ',
-            ]
-        ];
-        yield 'start from BL corner' => [
-            Area::fromDimensions(5, 5),
-            ListWidget::default()
-                ->startCorner(Corner::BottomLeft)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '     ',
-                '4    ',
-                '3    ',
-                '2    ',
-                '1    ',
-            ]
-        ];
-        yield 'highlight' => [
-            Area::fromDimensions(5, 5),
-            ListWidget::default()
-                ->startCorner(Corner::BottomLeft)
-                ->select(1)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '     ',
-                '  4  ',
-                '  3  ',
-                '>>2  ',
-                '  1  ',
-            ]
-        ];
-        yield 'with offset' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->offset(1)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '2  ',
-                '3  ',
-            ]
-        ];
-        yield 'with selected and offset' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->offset(1)
-                ->select(2)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '  2',
-                '>>3',
-            ]
-        ];
-        yield 'scroll to selected if offset out of range' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->offset(0)
-                ->select(3)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '  3',
-                '>>4',
-            ]
-        ];
-        yield 'with out of range negative offset' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->offset(-10)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '1  ',
-                '2  ',
-            ]
-        ];
-        yield 'with out of range positive offset' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->offset(100)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '4  ',
-                '   ',
-            ]
-        ];
-        yield 'with out of range positive selection' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->select(100)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '  3',
-                '  4',
-            ]
-        ];
-        yield 'with out of range negative selection' => [
-            Area::fromDimensions(3, 2),
-            ListWidget::default()
-                ->select(-100)
-                ->items(
-                    ListItem::new(Text::fromString('1')),
-                    ListItem::new(Text::fromString('2')),
-                    ListItem::new(Text::fromString('3')),
-                    ListItem::new(Text::fromString('4')),
-                ),
-            [
-                '>>1',
-                '  2',
-            ]
-        ];
-    }
-}
+    expect($buffer->toLines())->toEqual([
+        'Hello',
+        'World',
+        '     ',
+        '     ',
+        '     ',
+    ]);
+});
+
+test('start from BL corner', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+    render($buffer, ListWidget::default()
+        ->startCorner(Corner::BottomLeft)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '     ',
+        '4    ',
+        '3    ',
+        '2    ',
+        '1    ',
+    ]);
+});
+
+test('highlight', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(5, 5));
+    render($buffer, ListWidget::default()
+        ->startCorner(Corner::BottomLeft)
+        ->select(1)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '     ',
+        '  4  ',
+        '  3  ',
+        '>>2  ',
+        '  1  ',
+    ]);
+});
+
+test('with offset', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->offset(1)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '2  ',
+        '3  ',
+    ]);
+});
+
+test('with selected and offset', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->offset(1)
+        ->select(2)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '  2',
+        '>>3',
+    ]);
+});
+
+test('scroll to selected if offset out of range', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->offset(0)
+        ->select(3)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '  3',
+        '>>4',
+    ]);
+});
+
+test('with out of range negative offset', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->offset(-10)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '1  ',
+        '2  ',
+    ]);
+});
+
+test('with out of range positive offset', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->offset(100)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '4  ',
+        '   ',
+    ]);
+});
+
+test('with out of range positive selection', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->select(100)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '  3',
+        '  4',
+    ]);
+});
+
+test('with out of range negative selection', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 2));
+    render($buffer, ListWidget::default()
+        ->select(-100)
+        ->items(
+            ListItem::new(Text::fromString('1')),
+            ListItem::new(Text::fromString('2')),
+            ListItem::new(Text::fromString('3')),
+            ListItem::new(Text::fromString('4')),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        '>>1',
+        '  2',
+    ]);
+});

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Table;
+namespace Crumbls\Tui\Extension\Core\Widget\Table;
 
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Text\Text;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Line;
+use Crumbls\Tui\Text\Text;
 
 final class TableCell
 {

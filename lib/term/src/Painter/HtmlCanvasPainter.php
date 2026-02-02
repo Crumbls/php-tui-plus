@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Term\Painter;
+namespace Crumbls\Term\Painter;
 
 use PhpTui\Term\Action;
 use PhpTui\Term\Action\Clear;

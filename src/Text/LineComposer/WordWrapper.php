@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Text\LineComposer;
+namespace Crumbls\Tui\Text\LineComposer;
 
 use Generator;
-use PhpTui\Tui\Text\LineComposer;
-use PhpTui\Tui\Text\StyledGrapheme;
-use PhpTui\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Text\LineComposer;
+use Crumbls\Tui\Text\StyledGrapheme;
+use Crumbls\Tui\Widget\HorizontalAlignment;
 
 final class WordWrapper implements LineComposer
 {

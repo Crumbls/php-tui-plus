@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Benchmark\Model;
+namespace Crumbls\Tui\Tests\Benchmark\Model;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
@@ -12,32 +12,32 @@ use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Display\Display;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\MapShape;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
-use PhpTui\Tui\Extension\Core\Widget\BufferWidget;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\Core\Widget\Chart\Axis;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
-use PhpTui\Tui\Extension\Core\Widget\ChartWidget;
-use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
-use PhpTui\Tui\Extension\Core\Widget\ListWidget;
-use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableRow;
-use PhpTui\Tui\Extension\Core\Widget\TableWidget;
-use PhpTui\Tui\Layout\Constraint;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Text\Title;
-use PhpTui\Tui\Widget\Borders;
-use PhpTui\Tui\Widget\Direction;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Bridge\PhpTerm\PhpTermBackend;
+use Crumbls\Tui\Display\Display;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Shape\MapShape;
+use Crumbls\Tui\Extension\Core\Widget\BlockWidget;
+use Crumbls\Tui\Extension\Core\Widget\Buffer\BufferContext;
+use Crumbls\Tui\Extension\Core\Widget\BufferWidget;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Extension\Core\Widget\Chart\Axis;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Extension\Core\Widget\Chart\DataSet;
+use Crumbls\Tui\Extension\Core\Widget\ChartWidget;
+use Crumbls\Tui\Extension\Core\Widget\GridWidget;
+use Crumbls\Tui\Extension\Core\Widget\List\ListItem;
+use Crumbls\Tui\Extension\Core\Widget\ListWidget;
+use Crumbls\Tui\Extension\Core\Widget\ParagraphWidget;
+use Crumbls\Tui\Extension\Core\Widget\Table\TableCell;
+use Crumbls\Tui\Extension\Core\Widget\Table\TableRow;
+use Crumbls\Tui\Extension\Core\Widget\TableWidget;
+use Crumbls\Tui\Layout\Constraint;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Text\Line;
+use Crumbls\Tui\Text\Title;
+use Crumbls\Tui\Widget\Borders;
+use Crumbls\Tui\Widget\Direction;
+use Crumbls\Tui\Widget\Widget;
 
 final class DisplayBench
 {

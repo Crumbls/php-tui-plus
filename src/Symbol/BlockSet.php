@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Symbol;
+namespace Crumbls\Tui\Symbol;
 
 final class BlockSet
 {

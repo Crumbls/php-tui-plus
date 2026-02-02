@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\ImageMagick\Shape;
+namespace Crumbls\Tui\Extension\ImageMagick\Shape;
 
-use PhpTui\Tui\Canvas\Shape;
-use PhpTui\Tui\Position\FloatPosition;
+use Crumbls\Tui\Canvas\Shape;
+use Crumbls\Tui\Position\FloatPosition;
 use RuntimeException;
 
 /**

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas;
+namespace Crumbls\Tui\Canvas;
 
 use ArrayIterator;
 use IteratorAggregate;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use Traversable;
 
 /**

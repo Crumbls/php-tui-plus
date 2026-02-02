@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas;
+namespace Crumbls\Tui\Canvas;
 
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Position\Position;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Position\Position;
 
 abstract class CanvasGrid
 {

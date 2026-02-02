@@ -2,19 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Position;
+use Crumbls\Tui\Position\FractionalPosition;
 
-use PhpTui\Tui\Position\FractionalPosition;
-use PHPUnit\Framework\TestCase;
-
-final class FractionalPositionTest extends TestCase
-{
-    public function testRotate(): void
-    {
-        self::assertEqualsWithDelta(
-            FractionalPosition::at(-0.5, 0.5),
-            FractionalPosition::at(0.5, 0.5)->rotate(deg2rad(90)),
-            0.2
-        );
-    }
-}
+test('rotate', function (): void {
+    expect(FractionalPosition::at(0.5, 0.5)->rotate(deg2rad(90)))
+        ->toEqualWithDelta(FractionalPosition::at(-0.5, 0.5), 0.2);
+});

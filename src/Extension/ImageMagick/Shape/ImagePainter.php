@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\ImageMagick\Shape;
+namespace Crumbls\Tui\Extension\ImageMagick\Shape;
 
 use ImagickPixel;
-use PhpTui\Tui\Canvas\Label;
-use PhpTui\Tui\Canvas\Painter;
-use PhpTui\Tui\Canvas\Shape;
-use PhpTui\Tui\Canvas\ShapePainter;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\RgbColor;
-use PhpTui\Tui\Extension\Core\Shape\LineShape;
-use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
-use PhpTui\Tui\Position\FloatPosition;
-use PhpTui\Tui\Text\Line as PhpTuiLine;
+use Crumbls\Tui\Canvas\Label;
+use Crumbls\Tui\Canvas\Painter;
+use Crumbls\Tui\Canvas\Shape;
+use Crumbls\Tui\Canvas\ShapePainter;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\RgbColor;
+use Crumbls\Tui\Extension\Core\Shape\LineShape;
+use Crumbls\Tui\Extension\ImageMagick\ImageRegistry;
+use Crumbls\Tui\Position\FloatPosition;
+use Crumbls\Tui\Text\Line as PhpTuiLine;
 
 final class ImagePainter implements ShapePainter
 {

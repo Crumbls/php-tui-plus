@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Term\Tests\Painter;
+namespace Crumbls\Term\Tests\Painter;
 
 use PhpTui\Term\Actions;
 use PhpTui\Term\Painter\HtmlCanvasPainter;

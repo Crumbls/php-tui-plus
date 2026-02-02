@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas;
+namespace Crumbls\Tui\Canvas;
 
 /**
  * Marker interface for Shapes

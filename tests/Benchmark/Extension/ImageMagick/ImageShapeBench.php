@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Benchmark\Extension\ImageMagick;
+namespace Crumbls\Tui\Tests\Benchmark\Extension\ImageMagick;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
@@ -12,11 +12,11 @@ use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\Display\Display;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
+use Crumbls\Tui\Bridge\PhpTerm\PhpTermBackend;
+use Crumbls\Tui\Display\Display;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Extension\ImageMagick\Shape\ImageShape;
 
 #[Iterations(4)]
 #[Revs(25)]

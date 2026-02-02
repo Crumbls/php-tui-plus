@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Widget\Direction;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\BarGroup;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Widget\Direction;
+use Crumbls\Tui\Widget\Widget;
 
 final class BarChartWidget implements Widget
 {

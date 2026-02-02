@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\ParagraphWidget;
-use PhpTui\Tui\Text\Text;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\ParagraphWidget;
+use Crumbls\Tui\Text\Text;
 
 require 'vendor/autoload.php';
 

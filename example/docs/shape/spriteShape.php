@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\SpriteShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Position\FloatPosition;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Shape\SpriteShape;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Position\FloatPosition;
 
 require 'vendor/autoload.php';
 

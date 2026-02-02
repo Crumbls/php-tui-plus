@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\ImageMagick\Widget;
+namespace Crumbls\Tui\Extension\ImageMagick\Widget;
 
 use Imagick;
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\ImageMagick\ImageRegistry;
-use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Extension\ImageMagick\ImageRegistry;
+use Crumbls\Tui\Extension\ImageMagick\Shape\ImageShape;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class ImageRenderer implements WidgetRenderer
 {

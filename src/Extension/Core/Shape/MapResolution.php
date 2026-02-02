@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Shape;
+namespace Crumbls\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Extension\Core\Shape\Data\MapData;
+use Crumbls\Tui\Extension\Core\Shape\Data\MapData;
 
 enum MapResolution
 {

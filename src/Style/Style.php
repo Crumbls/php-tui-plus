@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Style;
+namespace Crumbls\Tui\Style;
 
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Position\FractionalPosition;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Position\FractionalPosition;
 use Stringable;
 
 final class Style implements Stringable, Styleable

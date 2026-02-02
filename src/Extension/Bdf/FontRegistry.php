@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Bdf;
+namespace Crumbls\Tui\Extension\Bdf;
 
-use PhpTui\BDF\BdfFont;
-use PhpTui\BDF\BdfParser;
+use Crumbls\BDF\BdfFont;
+use Crumbls\BDF\BdfParser;
 use RuntimeException;
 
 /**

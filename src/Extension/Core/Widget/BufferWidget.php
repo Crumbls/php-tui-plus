@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
 use Closure;
-use PhpTui\Tui\Extension\Core\Widget\Buffer\BufferContext;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Extension\Core\Widget\Buffer\BufferContext;
+use Crumbls\Tui\Widget\Widget;
 
 /**
  * This widget provides access to the Buffer and allows you

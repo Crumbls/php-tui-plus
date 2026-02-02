@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
-use PhpTui\Tui\Extension\Core\Widget\BarChartWidget;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Line;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\BarGroup;
+use Crumbls\Tui\Extension\Core\Widget\BarChartWidget;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Line;
 
 require 'vendor/autoload.php';
 

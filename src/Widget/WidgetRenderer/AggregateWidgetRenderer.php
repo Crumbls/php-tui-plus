@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Widget\WidgetRenderer;
+namespace Crumbls\Tui\Widget\WidgetRenderer;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 /**
  * Will iterate over all widget renderers to render the widget Each renderer

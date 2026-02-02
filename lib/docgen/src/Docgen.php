@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Docgen;
+namespace Crumbls\Docgen;
 
 use Generator;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
@@ -13,7 +13,7 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
-use PhpTui\Docgen\Renderer\AggregateDocRenderer;
+use Crumbls\Docgen\Renderer\AggregateDocRenderer;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflection\ReflectionClass;
 use Roave\BetterReflection\Reflection\ReflectionProperty;

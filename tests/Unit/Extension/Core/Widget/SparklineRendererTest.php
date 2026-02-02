@@ -2,71 +2,54 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
+use Crumbls\Tui\Extension\Core\Widget\SparklineWidget;
 
-use Generator;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
-use PhpTui\Tui\Extension\Core\Widget\SparklineWidget;
-use PhpTui\Tui\Widget\Widget;
+test('default', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(20, 2));
+    render($buffer, SparklineWidget::default());
 
-final class SparklineRendererTest extends WidgetTestCase
-{
-    /**
-     * @dataProvider provideSparklineRender
-     * @param array<int,string> $expected
-     */
-    public function testSparklineRender(Area $area, Widget $widget, array $expected): void
-    {
-        $buffer = Buffer::empty($area);
-        $this->render($buffer, $widget);
-        self::assertEquals($expected, $buffer->toLines());
-    }
-    /**
-     * @return Generator<array{Area,Widget,list<string>}>
-     */
-    public static function provideSparklineRender(): Generator
-    {
-        yield 'default' => [
-            Area::fromDimensions(20, 2),
-            SparklineWidget::default(),
-            [
-                '                    ',
-                '                    ',
-            ]
-           ,
-        ];
-        yield 'sparkline' => [
-            Area::fromDimensions(12, 1),
-            SparklineWidget::fromData(...range(0, 8)),
-            [
-                ' ▁▂▃▄▅▆▇█   ',
-            ]
-           ,
-        ];
-        yield 'right to left' => [
-            Area::fromDimensions(12, 1),
-            SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft),
-            [
-                '   █▇▆▅▄▃▂▁ ',
-            ]
-        ];
+    expect($buffer->toLines())->toEqual([
+        '                    ',
+        '                    ',
+    ]);
+});
 
-        yield 'taller' => [
-            Area::fromDimensions(12, 2),
-            SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft),
-            [
-            '   █▆▄▂     ',
-            '   █████▆▄▂ ',
-            ]
-        ];
-        yield 'with max' => [
-            Area::fromDimensions(12, 1),
-            SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft)->max(20),
-            [
-                '   ▃▃▂▂▂▁▁  '
-            ]
-        ];
-    }
-}
+test('sparkline', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(12, 1));
+    render($buffer, SparklineWidget::fromData(...range(0, 8)));
+
+    expect($buffer->toLines())->toEqual([
+        ' ▁▂▃▄▅▆▇█   ',
+    ]);
+});
+
+test('right to left', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(12, 1));
+    render($buffer, SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft));
+
+    expect($buffer->toLines())->toEqual([
+        '   █▇▆▅▄▃▂▁ ',
+    ]);
+});
+
+test('taller', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(12, 2));
+    render($buffer, SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft));
+
+    expect($buffer->toLines())->toEqual([
+        '   █▆▄▂     ',
+        '   █████▆▄▂ ',
+    ]);
+});
+
+test('with max', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(12, 1));
+    render($buffer, SparklineWidget::fromData(...range(0, 8))->direction(RenderDirection::RightToLeft)->max(20));
+
+    expect($buffer->toLines())->toEqual([
+        '   ▃▃▂▂▂▁▁  ',
+    ]);
+});

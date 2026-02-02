@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Position;
+namespace Crumbls\Tui\Position;
 
 use Closure;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
 use RuntimeException;
 use Stringable;
 

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class ScrollbarRenderer implements WidgetRenderer
 {

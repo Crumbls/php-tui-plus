@@ -2,43 +2,35 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Bridge\Cassowary;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Layout\Constraint;
+use Crumbls\Tui\Layout\Layout;
+use Crumbls\Tui\Widget\Direction;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Layout\Constraint;
-use PhpTui\Tui\Layout\Layout;
-use PhpTui\Tui\Widget\Direction;
-use PHPUnit\Framework\TestCase;
+test('percentage', function (): void {
+    $splits = Layout::default()
+        ->direction(Direction::Horizontal)
+        ->constraints([
+            Constraint::percentage(50),
+            Constraint::percentage(50),
+        ])
+        ->split(Area::fromDimensions(100, 100));
 
-final class CassowaryConstraintSolverTest extends TestCase
-{
-    public function testPercentage(): void
-    {
-        $splits = Layout::default()
-            ->direction(Direction::Horizontal)
-            ->constraints([
-                Constraint::percentage(50),
-                Constraint::percentage(50),
-            ])
-            ->split(Area::fromDimensions(100, 100));
+    expect($splits->get(0)->toArray())->toBe([0, 0, 50, 100]);
+    expect($splits->get(1)->toArray())->toBe([50, 0, 50, 100]);
+});
 
-        self::assertEquals([0, 0, 50, 100], $splits->get(0)->toArray());
-        self::assertEquals([50, 0, 50, 100], $splits->get(1)->toArray());
-    }
+test('multiple percentages', function (): void {
+    $splits = Layout::default()
+        ->direction(Direction::Horizontal)
+        ->constraints([
+            Constraint::percentage(50),
+            Constraint::percentage(25),
+            Constraint::percentage(25),
+        ])
+        ->split(Area::fromDimensions(100, 100));
 
-    public function testMultiplePercentages(): void
-    {
-        $splits = Layout::default()
-            ->direction(Direction::Horizontal)
-            ->constraints([
-                Constraint::percentage(50),
-                Constraint::percentage(25),
-                Constraint::percentage(25),
-            ])
-            ->split(Area::fromDimensions(100, 100));
-
-        self::assertEquals([0, 0, 50, 100], $splits->get(0)->toArray());
-        self::assertEquals([50, 0, 25, 100], $splits->get(1)->toArray());
-        self::assertEquals([75, 0, 25, 100], $splits->get(2)->toArray());
-    }
-}
+    expect($splits->get(0)->toArray())->toBe([0, 0, 50, 100]);
+    expect($splits->get(1)->toArray())->toBe([50, 0, 25, 100]);
+    expect($splits->get(2)->toArray())->toBe([75, 0, 25, 100]);
+});

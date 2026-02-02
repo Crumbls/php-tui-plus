@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Layout\Constraint;
-use PhpTui\Tui\Text\Title;
-use PhpTui\Tui\Widget\Borders;
-use PhpTui\Tui\Widget\Direction;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\BlockWidget;
+use Crumbls\Tui\Extension\Core\Widget\GridWidget;
+use Crumbls\Tui\Layout\Constraint;
+use Crumbls\Tui\Text\Title;
+use Crumbls\Tui\Widget\Borders;
+use Crumbls\Tui\Widget\Direction;
 
 require 'vendor/autoload.php';
 

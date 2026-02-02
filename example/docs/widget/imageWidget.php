@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\ImageMagick\ImageMagickExtension;
-use PhpTui\Tui\Extension\ImageMagick\Widget\ImageWidget;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\ImageMagick\ImageMagickExtension;
+use Crumbls\Tui\Extension\ImageMagick\Widget\ImageWidget;
 
 require 'vendor/autoload.php';
 

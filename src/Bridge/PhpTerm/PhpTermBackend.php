@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Bridge\PhpTerm;
+namespace Crumbls\Tui\Bridge\PhpTerm;
 
 use PhpTui\Term\Action;
 use PhpTui\Term\Action\SetBackgroundColor;
@@ -17,17 +17,17 @@ use PhpTui\Term\Colors;
 use PhpTui\Term\Event\CursorPositionEvent;
 use PhpTui\Term\Terminal as PhpTermTerminal;
 use PhpTui\Term\TerminalInformation\Size;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Color\LinearGradient;
-use PhpTui\Tui\Color\RgbColor;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Backend;
-use PhpTui\Tui\Display\BufferUpdates;
-use PhpTui\Tui\Display\ClearType;
-use PhpTui\Tui\Position\FractionalPosition;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Style\Modifier;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Color\LinearGradient;
+use Crumbls\Tui\Color\RgbColor;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Backend;
+use Crumbls\Tui\Display\BufferUpdates;
+use Crumbls\Tui\Display\ClearType;
+use Crumbls\Tui\Position\FractionalPosition;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Style\Modifier;
 use RuntimeException;
 
 final class PhpTermBackend implements Backend

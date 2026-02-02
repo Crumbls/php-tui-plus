@@ -1,33 +1,39 @@
 {
-    "name": "php-tui/php-tui",
+    "name": "crumbls/php-tui-plus",
     "description": "Comprehensive TUI library heavily influenced by Ratatui",
     "keywords": ["tui","console","terminal","cli"],
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "PhpTui\\Tui\\": "src/",
-            "PhpTui\\BDF\\": "lib/bdf/src"
+            "Crumbls\\Tui\\": "src/",
+            "Crumbls\\BDF\\": "lib/bdf/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PhpTui\\Tui\\Tests\\": "tests/",
-            "PhpTui\\Tui\\Example\\Demo\\": "example/demo/src",
-            "PhpTui\\Docgen\\": "lib/docgen/src/",
-            "PhpTui\\Term\\": "lib/term/src",
-            "PhpTui\\Bdf\\Tests\\": "lib/bdf/tests/"
+            "Crumbls\\Tui\\Tests\\": "tests/",
+            "Crumbls\\Tui\\Example\\Demo\\": "example/demo/src",
+            "Crumbls\\Docgen\\": "lib/docgen/src/",
+            "Crumbls\\Term\\": "lib/term/src",
+            "Crumbls\\Bdf\\Tests\\": "lib/bdf/tests/"
         }
     },
     "authors": [
-        {
-            "name": "Daniel Leech"
-        }
+      {
+        "name": "Chase C. Miller",
+        "email": "chase@crumbls.com"
+      }
     ],
     "require": {
         "php": "^8.1",
         "php-tui/cassowary": "^0.1.0",
-        "php-tui/term": "^0.3.2"
+        "php-tui/term": "^0.3.2",
+        "react/event-loop": "^1.5",
+        "react/stream": "^1.4"
+    },
+    "suggest": {
+        "illuminate/console": "Required for Laravel TUI commands (^10.0|^11.0)"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.34",
@@ -41,12 +47,13 @@
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-strict-rules": "^1.5",
         "phpstan/phpstan-phpunit": "^1.0",
-        "rector/rector": "^1.0"
+        "rector/rector": "^1.0",
+        "pestphp/pest": "^2.36"
     },
     "scripts": {
         "phpstan": "./vendor/bin/phpstan --memory-limit=1G",
         "php-cs-fixer": "./vendor/bin/php-cs-fixer fix",
-        "phpunit": "./vendor/bin/phpunit",
+        "test": "./vendor/bin/pest",
         "docs": "php ./scripts/docgen",
         "phpbench": "php ./vendor/bin/phpbench run --revs=1 --iterations=1",
         "rector": "./vendor/bin/rector process",
@@ -55,7 +62,7 @@
         "integrate": [
             "@phpstan",
             "@php-cs-fixer",
-            "@phpunit",
+            "@test",
             "@rector",
             "@phpbench",
             "@docs",
@@ -64,7 +71,15 @@
     },
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Crumbls\\Tui\\Laravel\\TuiServiceProvider"
+            ]
         }
     }
 }

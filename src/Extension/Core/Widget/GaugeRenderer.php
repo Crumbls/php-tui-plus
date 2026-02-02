@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Position\FractionalPosition;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Symbol\BlockSet;
-use PhpTui\Tui\Text\Span;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Position\FractionalPosition;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Symbol\BlockSet;
+use Crumbls\Tui\Text\Span;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class GaugeRenderer implements WidgetRenderer
 {

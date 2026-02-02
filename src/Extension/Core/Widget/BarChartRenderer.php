@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\BarChart\Bar;
-use PhpTui\Tui\Extension\Core\Widget\BarChart\BarGroup;
-use PhpTui\Tui\Extension\Core\Widget\BarChart\LabelInfo;
-use PhpTui\Tui\Position\FractionalPosition;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Symbol\BarSet;
-use PhpTui\Tui\Widget\Direction;
-use PhpTui\Tui\Widget\HorizontalAlignment;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\Bar;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\BarGroup;
+use Crumbls\Tui\Extension\Core\Widget\BarChart\LabelInfo;
+use Crumbls\Tui\Position\FractionalPosition;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Symbol\BarSet;
+use Crumbls\Tui\Widget\Direction;
+use Crumbls\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class BarChartRenderer implements WidgetRenderer
 {

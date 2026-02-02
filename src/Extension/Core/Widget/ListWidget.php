@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\List\HighlightSpacing;
-use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
-use PhpTui\Tui\Extension\Core\Widget\List\ListState;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Widget\Corner;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Extension\Core\Widget\List\HighlightSpacing;
+use Crumbls\Tui\Extension\Core\Widget\List\ListItem;
+use Crumbls\Tui\Extension\Core\Widget\List\ListState;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Widget\Corner;
+use Crumbls\Tui\Widget\Widget;
 
 /**
  * The List widget allows you to list and highlight items.

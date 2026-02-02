@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Example;
+namespace Crumbls\Tui\Tests\Example;
 
 use Generator;
 use PhpTui\Term\AnsiParser;

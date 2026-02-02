@@ -2,153 +2,139 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarSymbols;
+use Crumbls\Tui\Extension\Core\Widget\ScrollbarWidget;
 
-use Generator;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarOrientation;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarSymbols;
-use PhpTui\Tui\Extension\Core\Widget\ScrollbarWidget;
-use PhpTui\Tui\Widget\Widget;
+test('no state', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 7));
+    render($buffer, ScrollbarWidget::default());
 
-final class ScrollbarRendererTest extends WidgetTestCase
-{
-    /**
-     * @dataProvider provideScrollbarRender
-     * @param array<int,string> $expected
-     */
-    public function testScrollbarRender(Area $area, Widget $widget, array $expected): void
-    {
-        $buffer = Buffer::empty($area);
-        $this->render($buffer, $widget);
-        self::assertEquals($expected, $buffer->toLines());
-    }
-    /**
-     * @return Generator<array{Area,Widget,list<string>}>
-     */
-    public static function provideScrollbarRender(): Generator
-    {
-        yield 'no state' => [
-            Area::fromDimensions(3, 7),
-            ScrollbarWidget::default(),
-            [
-                '   ',
-                '   ',
-                '   ',
-                '   ',
-                '   ',
-                '   ',
-                '   ',
-            ]
-           ,
-        ];
-        yield 'vertical left' => [
-            Area::fromDimensions(3, 7),
-            ScrollbarWidget::default()->state(new ScrollbarState(10)),
-            [
-                '▲  ',
-                '█  ',
-                '█  ',
-                '║  ',
-                '║  ',
-                '║  ',
-                '▼  ',
-            ]
-           ,
-        ];
-        yield 'vertical right' => [
-            Area::fromDimensions(3, 7),
-            ScrollbarWidget::default()->state(new ScrollbarState(10))->orientation(ScrollbarOrientation::VerticalRight),
-            [
-                '  ▲',
-                '  █',
-                '  █',
-                '  ║',
-                '  ║',
-                '  ║',
-                '  ▼',
-            ]
-           ,
-        ];
-        yield 'no begining symbol' => [
-            Area::fromDimensions(3, 7),
-            ScrollbarWidget::default()->state(new ScrollbarState(10))->beginSymbol(null),
-            [
-                '█  ',
-                '█  ',
-                '█  ',
-                '║  ',
-                '║  ',
-                '║  ',
-                '▼  ',
-            ]
-           ,
-        ];
-        yield 'no end symbol' => [
-            Area::fromDimensions(3, 7),
-            ScrollbarWidget::default()->state(new ScrollbarState(10))->endSymbol(null),
-            [
-                '▲  ',
-                '█  ',
-                '█  ',
-                '█  ',
-                '║  ',
-                '║  ',
-                '║  ',
-            ]
-           ,
-        ];
-        yield 'double horizontal top' => [
-            Area::fromDimensions(7, 3),
-            ScrollbarWidget::default()->state(new ScrollbarState(10))->orientation(ScrollbarOrientation::HorizontalTop),
-            [
-                '◄██═══►',
-                '       ',
-                '       ',
-            ]
-           ,
-        ];
-        yield 'double horizontal bottom' => [
-            Area::fromDimensions(7, 3),
-            ScrollbarWidget::default()->state(new ScrollbarState(10))->orientation(ScrollbarOrientation::HorizontalBottom),
-            [
-                '       ',
-                '       ',
-                '◄██═══►',
-            ]
-           ,
-        ];
-        yield 'double horizontal bottom mid' => [
-            Area::fromDimensions(7, 3),
-            ScrollbarWidget::default()->state(new ScrollbarState(20, 10, 5))->orientation(ScrollbarOrientation::HorizontalBottom),
-            [
-                '       ',
-                '       ',
-                '◄══█══►',
-            ]
-           ,
-        ];
-        yield 'symbol vertical' => [
-            Area::fromDimensions(7, 3),
-            ScrollbarWidget::default()->state(new ScrollbarState(20, 10, 5))->symbols(ScrollbarSymbols::vertical()),
-            [
-            '↑      ',
-            '█      ',
-            '↓      ',
-            ]
-           ,
-        ];
-        yield 'symbol horizontal' => [
-            Area::fromDimensions(7, 3),
-            ScrollbarWidget::default()->state(new ScrollbarState(20, 10, 5))->orientation(ScrollbarOrientation::HorizontalTop)->symbols(ScrollbarSymbols::horizontal()),
-            [
-            '←──█──→',
-            '       ',
-            '       ',
-            ]
-           ,
-        ];
-    }
-}
+    expect($buffer->toLines())->toEqual([
+        '   ',
+        '   ',
+        '   ',
+        '   ',
+        '   ',
+        '   ',
+        '   ',
+    ]);
+});
+
+test('vertical left', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 7));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(10)));
+
+    expect($buffer->toLines())->toEqual([
+        '▲  ',
+        '█  ',
+        '█  ',
+        '║  ',
+        '║  ',
+        '║  ',
+        '▼  ',
+    ]);
+});
+
+test('vertical right', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 7));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(10))->orientation(ScrollbarOrientation::VerticalRight));
+
+    expect($buffer->toLines())->toEqual([
+        '  ▲',
+        '  █',
+        '  █',
+        '  ║',
+        '  ║',
+        '  ║',
+        '  ▼',
+    ]);
+});
+
+test('no beginning symbol', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 7));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(10))->beginSymbol(null));
+
+    expect($buffer->toLines())->toEqual([
+        '█  ',
+        '█  ',
+        '█  ',
+        '║  ',
+        '║  ',
+        '║  ',
+        '▼  ',
+    ]);
+});
+
+test('no end symbol', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(3, 7));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(10))->endSymbol(null));
+
+    expect($buffer->toLines())->toEqual([
+        '▲  ',
+        '█  ',
+        '█  ',
+        '█  ',
+        '║  ',
+        '║  ',
+        '║  ',
+    ]);
+});
+
+test('double horizontal top', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(7, 3));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(10))->orientation(ScrollbarOrientation::HorizontalTop));
+
+    expect($buffer->toLines())->toEqual([
+        '◄██═══►',
+        '       ',
+        '       ',
+    ]);
+});
+
+test('double horizontal bottom', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(7, 3));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(10))->orientation(ScrollbarOrientation::HorizontalBottom));
+
+    expect($buffer->toLines())->toEqual([
+        '       ',
+        '       ',
+        '◄██═══►',
+    ]);
+});
+
+test('double horizontal bottom mid', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(7, 3));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(20, 10, 5))->orientation(ScrollbarOrientation::HorizontalBottom));
+
+    expect($buffer->toLines())->toEqual([
+        '       ',
+        '       ',
+        '◄══█══►',
+    ]);
+});
+
+test('symbol vertical', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(7, 3));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(20, 10, 5))->symbols(ScrollbarSymbols::vertical()));
+
+    expect($buffer->toLines())->toEqual([
+        '↑      ',
+        '█      ',
+        '↓      ',
+    ]);
+});
+
+test('symbol horizontal', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(7, 3));
+    render($buffer, ScrollbarWidget::default()->state(new ScrollbarState(20, 10, 5))->orientation(ScrollbarOrientation::HorizontalTop)->symbols(ScrollbarSymbols::horizontal()));
+
+    expect($buffer->toLines())->toEqual([
+        '←──█──→',
+        '       ',
+        '       ',
+    ]);
+});

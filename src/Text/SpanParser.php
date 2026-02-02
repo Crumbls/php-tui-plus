@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Text;
+namespace Crumbls\Tui\Text;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Color\RgbColor;
-use PhpTui\Tui\Style\Modifier;
-use PhpTui\Tui\Style\Style;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Color\RgbColor;
+use Crumbls\Tui\Style\Modifier;
+use Crumbls\Tui\Style\Style;
 
 /**
  * This is a subset of the Symfony Console markup. It parses strings into a list of spans.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\Color\LinearGradient;
-use PhpTui\Tui\Color\RgbColor;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\GaugeWidget;
-use PhpTui\Tui\Style\Style;
+use Crumbls\Tui\Color\LinearGradient;
+use Crumbls\Tui\Color\RgbColor;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\GaugeWidget;
+use Crumbls\Tui\Style\Style;
 
 require 'vendor/autoload.php';
 

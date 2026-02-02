@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Benchmark\Extension\Core\Widget;
+namespace Crumbls\Tui\Tests\Benchmark\Extension\Core\Widget;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
@@ -12,13 +12,13 @@ use PhpTui\Term\Painter\StringPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
 use PhpTui\Term\TerminalInformation\Size;
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
+use Crumbls\Tui\Bridge\PhpTerm\PhpTermBackend;
 
-use PhpTui\Tui\Display\Display;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Shape\MapResolution;
-use PhpTui\Tui\Extension\Core\Shape\MapShape;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Display\Display;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Shape\MapResolution;
+use Crumbls\Tui\Extension\Core\Shape\MapShape;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
 
 #[Iterations(10)]
 #[Revs(25)]

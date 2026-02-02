@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget\Sparkline;
+namespace Crumbls\Tui\Extension\Core\Widget\Sparkline;
 
 enum RenderDirection
 {

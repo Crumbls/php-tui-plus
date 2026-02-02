@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Bdf\Tests\Benchmark;
+namespace Crumbls\Bdf\Tests\Benchmark;
 
 use PhpBench\Attributes\Iterations;
 use PhpBench\Attributes\Revs;
-use PhpTui\BDF\BdfParser;
+use Crumbls\BDF\BdfParser;
 use RuntimeException;
 
 #[Iterations(10)]

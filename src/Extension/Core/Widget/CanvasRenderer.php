@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Canvas\CanvasContext;
-use PhpTui\Tui\Canvas\ShapePainter;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Canvas\CanvasContext;
+use Crumbls\Tui\Canvas\ShapePainter;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class CanvasRenderer implements WidgetRenderer
 {

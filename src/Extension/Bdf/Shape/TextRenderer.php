@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Bdf\Shape;
+namespace Crumbls\Tui\Extension\Bdf\Shape;
 
-use PhpTui\BDF\BdfGlyph;
-use PhpTui\Tui\Canvas\Painter;
-use PhpTui\Tui\Canvas\Shape;
-use PhpTui\Tui\Canvas\ShapePainter;
-use PhpTui\Tui\Extension\Bdf\FontRegistry;
-use PhpTui\Tui\Position\FloatPosition;
+use Crumbls\BDF\BdfGlyph;
+use Crumbls\Tui\Canvas\Painter;
+use Crumbls\Tui\Canvas\Shape;
+use Crumbls\Tui\Canvas\ShapePainter;
+use Crumbls\Tui\Extension\Bdf\FontRegistry;
+use Crumbls\Tui\Position\FloatPosition;
 
 final class TextRenderer implements ShapePainter
 {

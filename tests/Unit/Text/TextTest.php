@@ -2,73 +2,61 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Text;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Style\Modifier;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Text;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Style\Modifier;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Text;
-use PHPUnit\Framework\TestCase;
+test('raw', function (): void {
+    $text = Text::fromString("The first line\nThe second line");
+    expect($text->lines)->toHaveCount(2);
+});
 
-final class TextTest extends TestCase
-{
-    public function testRaw(): void
-    {
-        $text = Text::fromString("The first line\nThe second line");
-        self::assertCount(2, $text->lines);
-    }
+test('styled', function (): void {
+    $style = Style::default();
+    $style->fg = AnsiColor::Red;
+    $text = Text::styled("The first line\nThe second line", $style);
+    expect($text->lines)->toHaveCount(2);
+    expect($text->lines[0]->spans)->toHaveCount(1);
+    expect($text->lines[0]->spans[0]->style->fg)->toBe(AnsiColor::Red);
+});
 
-    public function testStyled(): void
-    {
-        $style = Style::default();
-        $style->fg = AnsiColor::Red;
-        $text = Text::styled("The first line\nThe second line", $style);
-        self::assertCount(2, $text->lines);
-        self::assertCount(1, $text->lines[0]->spans);
-        self::assertEquals(AnsiColor::Red, $text->lines[0]->spans[0]->style->fg);
-    }
+test('parse', function (): void {
+    $text = Text::parse("<fg=blue;bg=white;options=bold,italic>Hello</>\n<fg=white;bg=green;options=italic>World</>");
+    expect($text->lines)->toHaveCount(2);
 
-    public function testParse(): void
-    {
-        $text = Text::parse("<fg=blue;bg=white;options=bold,italic>Hello</>\n<fg=white;bg=green;options=italic>World</>");
-        self::assertCount(2, $text->lines);
+    $firstLine = $text->lines[0];
+    expect($firstLine->spans)->toHaveCount(1);
+    expect($firstLine->spans[0]->style->fg)->toBe(AnsiColor::Blue);
+    expect($firstLine->spans[0]->style->bg)->toBe(AnsiColor::White);
+    expect(($firstLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::BOLD)->toBeTrue();
+    expect(($firstLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC)->toBeTrue();
 
-        $firstLine = $text->lines[0];
-        self::assertCount(1, $firstLine->spans);
-        self::assertEquals(AnsiColor::Blue, $firstLine->spans[0]->style->fg);
-        self::assertEquals(AnsiColor::White, $firstLine->spans[0]->style->bg);
-        self::assertTrue(($firstLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
-        self::assertTrue(($firstLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
+    $secondLine = $text->lines[1];
+    expect($secondLine->spans)->toHaveCount(1);
+    expect($secondLine->spans[0]->style->fg)->toBe(AnsiColor::White);
+    expect($secondLine->spans[0]->style->bg)->toBe(AnsiColor::Green);
+    expect(($secondLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::NONE)->toBeTrue();
+    expect(($secondLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC)->toBeTrue();
+});
 
-        $secondLine = $text->lines[1];
-        self::assertCount(1, $secondLine->spans);
-        self::assertEquals(AnsiColor::White, $secondLine->spans[0]->style->fg);
-        self::assertEquals(AnsiColor::Green, $secondLine->spans[0]->style->bg);
-        self::assertTrue(($secondLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::NONE);
-        self::assertTrue(($secondLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
-    }
+test('parse text with break lines', function (): void {
+    $text = Text::parse("<fg=blue;bg=white;options=bold,italic>Hel\nlo</>\n<fg=white;bg=green;options=italic>Wor\nld</>");
+    expect($text->lines)->toHaveCount(2);
 
-    public function testParseTextWithBreakLines(): void
-    {
-        // This test is to ensure that the text is parsed correctly when it contains line breaks inside and outside the tags.
-        $text = Text::parse("<fg=blue;bg=white;options=bold,italic>Hel\nlo</>\n<fg=white;bg=green;options=italic>Wor\nld</>");
-        // Should be parsed into two new lines.
-        self::assertCount(2, $text->lines);
+    $firstLine = $text->lines[0];
+    expect($firstLine->spans[0]->content)->toBe("Hel\nlo");
+    expect($firstLine->spans)->toHaveCount(1);
+    expect($firstLine->spans[0]->style->fg)->toBe(AnsiColor::Blue);
+    expect($firstLine->spans[0]->style->bg)->toBe(AnsiColor::White);
+    expect(($firstLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::BOLD)->toBeTrue();
+    expect(($firstLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC)->toBeTrue();
 
-        $firstLine = $text->lines[0];
-        self::assertSame("Hel\nlo", $firstLine->spans[0]->content);
-        self::assertCount(1, $firstLine->spans);
-        self::assertEquals(AnsiColor::Blue, $firstLine->spans[0]->style->fg);
-        self::assertEquals(AnsiColor::White, $firstLine->spans[0]->style->bg);
-        self::assertTrue(($firstLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
-        self::assertTrue(($firstLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
-
-        $secondLine = $text->lines[1];
-        self::assertSame("Wor\nld", $secondLine->spans[0]->content);
-        self::assertCount(1, $secondLine->spans);
-        self::assertEquals(AnsiColor::White, $secondLine->spans[0]->style->fg);
-        self::assertEquals(AnsiColor::Green, $secondLine->spans[0]->style->bg);
-        self::assertTrue(($secondLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::NONE);
-        self::assertTrue(($secondLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC);
-    }
-}
+    $secondLine = $text->lines[1];
+    expect($secondLine->spans[0]->content)->toBe("Wor\nld");
+    expect($secondLine->spans)->toHaveCount(1);
+    expect($secondLine->spans[0]->style->fg)->toBe(AnsiColor::White);
+    expect($secondLine->spans[0]->style->bg)->toBe(AnsiColor::Green);
+    expect(($secondLine->spans[0]->style->addModifiers & Modifier::BOLD) === Modifier::NONE)->toBeTrue();
+    expect(($secondLine->spans[0]->style->addModifiers & Modifier::ITALIC) === Modifier::ITALIC)->toBeTrue();
+});

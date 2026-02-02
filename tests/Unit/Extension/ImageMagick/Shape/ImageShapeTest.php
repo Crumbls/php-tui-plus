@@ -2,81 +2,70 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\ImageMagick\Shape;
+use Crumbls\Tui\Canvas\CanvasContext;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\CanvasRenderer;
+use Crumbls\Tui\Extension\Core\Widget\CanvasWidget;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Extension\ImageMagick\Shape\ImagePainter;
+use Crumbls\Tui\Extension\ImageMagick\Shape\ImageShape;
+use Crumbls\Tui\Position\FloatPosition;
+use Crumbls\Tui\Widget\WidgetRenderer\NullWidgetRenderer;
 
-use Generator;
-use PhpTui\Tui\Canvas\CanvasContext;
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\CanvasRenderer;
-use PhpTui\Tui\Extension\Core\Widget\CanvasWidget;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Extension\ImageMagick\Shape\ImagePainter;
-use PhpTui\Tui\Extension\ImageMagick\Shape\ImageShape;
-use PhpTui\Tui\Position\FloatPosition;
-use PhpTui\Tui\Widget\WidgetRenderer\NullWidgetRenderer;
-use PHPUnit\Framework\TestCase;
-
-final class ImageShapeTest extends TestCase
-{
-    /**
-     * @dataProvider provideImage
-     * @param array<int,string> $expected
-     */
-    public function testImage(?ImageShape $image, Marker $marker, array $expected): void
-    {
-        if (null === $image) {
-            self::markTestSkipped('Image Magick extension not installed');
-        }
-        $canvas = CanvasWidget::default()
-            ->marker($marker)
-            ->xBounds(AxisBounds::new(0, 10))
-            ->yBounds(AxisBounds::new(0, 4))
-            ->paint(static function (CanvasContext $context) use ($image): void {
-                $context->draw($image);
-            });
-        $area = Area::fromDimensions(10, 4);
-        $buffer = Buffer::empty($area);
-        (new CanvasRenderer(
-            new ImagePainter(),
-        ))->render(new NullWidgetRenderer(), $canvas, $buffer, $buffer->area());
-        self::assertEquals(implode("\n", $expected), $buffer->toString());
+test('renders image (no colors in this test!)', function (): void {
+    if (!extension_loaded('imagick')) {
+        $this->markTestSkipped('Image Magick extension not installed');
     }
 
-    /**
-     * @return Generator<array{?ImageShape,Marker,array<int,string>}>
-     */
-    public static function provideImage(): Generator
-    {
-        if (!extension_loaded('imagick')) {
-            yield [
-                null,
-                Marker::Block,
-                [''],
-            ];
+    $image = ImageShape::fromPath(__DIR__ . '/example.jpg');
+    $expected = [
+        '██████████',
+        '██████████',
+        '██████████',
+        '██████████',
+    ];
 
-            return;
-        }
-        yield 'renders image (no colors in this test!)' => [
-            ImageShape::fromPath(__DIR__ . '/example.jpg'),
-            Marker::Block,
-            [
-                    '██████████',
-                    '██████████',
-                    '██████████',
-                    '██████████',
-            ]
-        ];
-        yield 'position image' => [
-            ImageShape::fromPath(__DIR__ . '/example.jpg')->position(FloatPosition::at(3, 2)),
-            Marker::Block,
-            [
-                    '  ████████',
-                    '  ████████',
-                    '          ',
-                    '          ',
-            ]
-        ];
+    $canvas = CanvasWidget::default()
+        ->marker(Marker::Block)
+        ->xBounds(AxisBounds::new(0, 10))
+        ->yBounds(AxisBounds::new(0, 4))
+        ->paint(static function (CanvasContext $context) use ($image): void {
+            $context->draw($image);
+        });
+    $area = Area::fromDimensions(10, 4);
+    $buffer = Buffer::empty($area);
+    (new CanvasRenderer(
+        new ImagePainter(),
+    ))->render(new NullWidgetRenderer(), $canvas, $buffer, $buffer->area());
+    expect($buffer->toString())->toBe(implode("\n", $expected));
+});
+
+test('position image', function (): void {
+    if (!extension_loaded('imagick')) {
+        $this->markTestSkipped('Image Magick extension not installed');
     }
-}
+
+    $image = ImageShape::fromPath(__DIR__ . '/example.jpg')->position(FloatPosition::at(3, 2));
+    $expected = [
+        '  ████████',
+        '  ████████',
+        '          ',
+        '          ',
+    ];
+
+    $canvas = CanvasWidget::default()
+        ->marker(Marker::Block)
+        ->xBounds(AxisBounds::new(0, 10))
+        ->yBounds(AxisBounds::new(0, 4))
+        ->paint(static function (CanvasContext $context) use ($image): void {
+            $context->draw($image);
+        });
+    $area = Area::fromDimensions(10, 4);
+    $buffer = Buffer::empty($area);
+    (new CanvasRenderer(
+        new ImagePainter(),
+    ))->render(new NullWidgetRenderer(), $canvas, $buffer, $buffer->area());
+    expect($buffer->toString())->toBe(implode("\n", $expected));
+});

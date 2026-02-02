@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Position;
+namespace Crumbls\Tui\Position;
 
 use RuntimeException;
 use Stringable;

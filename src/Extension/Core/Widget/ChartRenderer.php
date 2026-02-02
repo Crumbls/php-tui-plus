@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Canvas\CanvasContext;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Shape\PointsShape;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Extension\Core\Widget\Chart\ChartLayout;
-use PhpTui\Tui\Extension\Core\Widget\Chart\DataSet;
-use PhpTui\Tui\Math\VectorUtil;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Symbol\LineSet;
-use PhpTui\Tui\Text\Span;
-use PhpTui\Tui\Widget\HorizontalAlignment;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Canvas\CanvasContext;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Shape\PointsShape;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Extension\Core\Widget\Chart\ChartLayout;
+use Crumbls\Tui\Extension\Core\Widget\Chart\DataSet;
+use Crumbls\Tui\Math\VectorUtil;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Symbol\LineSet;
+use Crumbls\Tui\Text\Span;
+use Crumbls\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 /**
  * Renders a a composite of scatter or line graphs.

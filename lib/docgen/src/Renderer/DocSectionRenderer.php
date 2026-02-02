@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Docgen\Renderer;
+namespace Crumbls\Docgen\Renderer;
 
-use PhpTui\Docgen\DocRenderer;
-use PhpTui\Docgen\DocSection;
+use Crumbls\Docgen\DocRenderer;
+use Crumbls\Docgen\DocSection;
 
 final class DocSectionRenderer implements DocRenderer
 {

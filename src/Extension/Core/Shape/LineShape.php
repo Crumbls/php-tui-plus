@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Shape;
+namespace Crumbls\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Canvas\Shape;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Position\FloatPosition;
+use Crumbls\Tui\Canvas\Shape;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Position\FloatPosition;
 
 /**
  * Draw a straight line from one point to another.

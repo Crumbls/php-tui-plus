@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Bridge\Cassowary;
+namespace Crumbls\Tui\Bridge\Cassowary;
 
 use PhpTui\Cassowary\Expression;
 use PhpTui\Cassowary\Variable;

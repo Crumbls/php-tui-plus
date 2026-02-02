@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\List\ListItem;
-use PhpTui\Tui\Extension\Core\Widget\List\ListState;
-use PhpTui\Tui\Extension\Core\Widget\ListWidget;
-use PhpTui\Tui\Text\Text;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\List\ListItem;
+use Crumbls\Tui\Extension\Core\Widget\List\ListState;
+use Crumbls\Tui\Extension\Core\Widget\ListWidget;
+use Crumbls\Tui\Text\Text;
 
 require 'vendor/autoload.php';
 

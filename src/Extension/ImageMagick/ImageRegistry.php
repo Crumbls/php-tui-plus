@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\ImageMagick;
+namespace Crumbls\Tui\Extension\ImageMagick;
 
 use Imagick;
 use RuntimeException;

@@ -2,39 +2,33 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Display\Viewport;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Backend\DummyBackend;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Display\Cell;
+use Crumbls\Tui\Display\ClearType;
+use Crumbls\Tui\Position\Position;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Backend\DummyBackend;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Display\Cell;
-use PhpTui\Tui\Display\ClearType;
-use PhpTui\Tui\Position\Position;
-use PHPUnit\Framework\TestCase;
+test('clear', function (): void {
+    $backend = DummyBackend::fromDimensions(5, 5);
+    $backend->draw(Buffer::filled(Area::fromDimensions(5, 5), Cell::fromChar('X'))->toUpdates());
 
-final class FixedTest extends TestCase
-{
-    public function testClear(): void
-    {
-        $backend = DummyBackend::fromDimensions(5, 5);
-        $backend->draw(Buffer::filled(Area::fromDimensions(5, 5), Cell::fromChar('X'))->toUpdates());
-        self::assertEquals(implode("\n", [
-            'XXXXX',
-            'XXXXX',
-            'XXXXX',
-            'XXXXX',
-            'XXXXX',
-        ]), $backend->toString());
+    expect($backend->toString())->toEqual(implode("\n", [
+        'XXXXX',
+        'XXXXX',
+        'XXXXX',
+        'XXXXX',
+        'XXXXX',
+    ]));
 
-        $backend->moveCursor(Position::at(2, 3));
-        $backend->clearRegion(ClearType::AfterCursor);
+    $backend->moveCursor(Position::at(2, 3));
+    $backend->clearRegion(ClearType::AfterCursor);
 
-        self::assertEquals(implode("\n", [
-            'XXXXX',
-            'XXXXX',
-            'XXXXX',
-            '     ',
-            'XXXXX',
-        ]), $backend->toString());
-    }
-}
+    expect($backend->toString())->toEqual(implode("\n", [
+        'XXXXX',
+        'XXXXX',
+        'XXXXX',
+        '     ',
+        'XXXXX',
+    ]));
+});

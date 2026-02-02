@@ -2,114 +2,92 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Style;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Style\Modifier;
+use Crumbls\Tui\Style\Style;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Style\Modifier;
-use PhpTui\Tui\Style\Style;
-use PHPUnit\Framework\TestCase;
+test('default', function (): void {
+    $style = Style::default();
 
-final class StyleTest extends TestCase
-{
-    public function testDefault(): void
-    {
-        $style = Style::default();
+    expect($style->fg)->toBeNull();
+    expect($style->bg)->toBeNull();
+    expect($style->underline)->toBeNull();
+    expect($style->addModifiers)->toBe(Modifier::NONE);
+    expect($style->subModifiers)->toBe(Modifier::NONE);
+});
 
-        self::assertNull($style->fg);
-        self::assertNull($style->bg);
-        self::assertNull($style->underline);
-        self::assertEquals(Modifier::NONE, $style->addModifiers);
-        self::assertEquals(Modifier::NONE, $style->subModifiers);
-    }
+test('fg', function (): void {
+    $style = Style::default()->fg(AnsiColor::Red);
 
-    public function testFg(): void
-    {
-        $style = Style::default()->fg(AnsiColor::Red);
+    expect($style->fg)->toBe(AnsiColor::Red);
+});
 
-        self::assertSame(AnsiColor::Red, $style->fg);
-    }
+test('bg', function (): void {
+    $style = Style::default()->bg(AnsiColor::Blue);
 
-    public function testBg(): void
-    {
-        $style = Style::default()->bg(AnsiColor::Blue);
+    expect($style->bg)->toBe(AnsiColor::Blue);
+});
 
-        self::assertSame(AnsiColor::Blue, $style->bg);
-    }
+test('add modifier', function (): void {
+    $style = Style::default()->addModifier(Modifier::BOLD);
 
-    public function testAddModifier(): void
-    {
-        $style = Style::default()->addModifier(Modifier::BOLD);
+    expect(($style->addModifiers & Modifier::BOLD) === Modifier::BOLD)->toBeTrue();
+});
 
-        self::assertTrue(($style->addModifiers & Modifier::BOLD) === Modifier::BOLD);
-    }
+test('sub modifier', function (): void {
+    $style = Style::default()->removeModifier(Modifier::ITALIC);
 
-    public function testSubModifier(): void
-    {
-        $style = Style::default()->removeModifier(Modifier::ITALIC);
+    expect(($style->subModifiers & Modifier::ITALIC) === Modifier::ITALIC)->toBeTrue();
+});
 
-        self::assertTrue(($style->subModifiers & Modifier::ITALIC) === Modifier::ITALIC);
-    }
+test('patch', function (): void {
+    $style1 = Style::default()->bg(AnsiColor::Red);
+    $style2 = Style::default()
+                ->fg(AnsiColor::Blue)
+                ->addModifier(Modifier::BOLD)
+                ->addModifier(Modifier::UNDERLINED);
 
-    public function testPatch(): void
-    {
-        $style1 = Style::default()->bg(AnsiColor::Red);
-        $style2 = Style::default()
-                    ->fg(AnsiColor::Blue)
-                    ->addModifier(Modifier::BOLD)
-                    ->addModifier(Modifier::UNDERLINED);
+    $combined = $style1->patchStyle($style2);
 
-        $combined = $style1->patchStyle($style2);
+    expect($combined->subModifiers)->toBe(Modifier::NONE);
 
-        self::assertEquals(Modifier::NONE, $combined->subModifiers);
+    expect($combined->addModifiers)->toBe(Modifier::BOLD | Modifier::UNDERLINED);
 
-        self::assertEquals(
-            Modifier::BOLD | Modifier::UNDERLINED,
-            $combined->addModifiers,
-        );
+    expect((string) $combined)->toBe((string) Style::default()->patchStyle($style1)->patchStyle($style2));
 
-        self::assertSame(
-            (string) Style::default()->patchStyle($style1)->patchStyle($style2),
-            (string) $combined
-        );
+    expect($combined->fg)->toBe(AnsiColor::Blue);
+    expect($combined->bg)->toBe(AnsiColor::Red);
 
-        self::assertSame(AnsiColor::Blue, $combined->fg);
-        self::assertSame(AnsiColor::Red, $combined->bg);
+    $combined2 = Style::default()->patchStyle($combined)->patchStyle(
+        Style::default()
+            ->removeModifier(Modifier::BOLD)
+            ->addModifier(Modifier::ITALIC),
+    );
 
-        $combined2 = Style::default()->patchStyle($combined)->patchStyle(
-            Style::default()
-                ->removeModifier(Modifier::BOLD)
-                ->addModifier(Modifier::ITALIC),
-        );
+    expect($combined2->subModifiers)->toBe(Modifier::BOLD);
 
-        self::assertEquals(Modifier::BOLD, $combined2->subModifiers);
+    expect($combined2->addModifiers)->toBe(Modifier::ITALIC | Modifier::UNDERLINED);
 
-        self::assertEquals(
-            Modifier::ITALIC | Modifier::UNDERLINED,
-            $combined2->addModifiers,
-        );
+    expect($combined->fg)->toBe(AnsiColor::Blue);
+    expect($combined->bg)->toBe(AnsiColor::Red);
+});
 
-        self::assertSame(AnsiColor::Blue, $combined->fg);
-        self::assertSame(AnsiColor::Red, $combined->bg);
-    }
+test('to string', function (): void {
+    $style = Style::default()
+                ->bg(AnsiColor::Red)
+                ->underline(AnsiColor::Blue)
+                ->addModifier(Modifier::BOLD)
+                ->removeModifier(Modifier::ITALIC)
+                ->removeModifier(Modifier::UNDERLINED);
 
-    public function testToString(): void
-    {
-        $style = Style::default()
-                    ->bg(AnsiColor::Red)
-                    ->underline(AnsiColor::Blue)
-                    ->addModifier(Modifier::BOLD)
-                    ->removeModifier(Modifier::ITALIC)
-                    ->removeModifier(Modifier::UNDERLINED);
+    $expectedString = sprintf(
+        'Style(fg:%s,bg: %s,u:%s,+mod:%d,-mod:%d)',
+        '-',
+        AnsiColor::Red->debugName(),
+        AnsiColor::Blue->debugName(),
+        Modifier::BOLD,
+        Modifier::ITALIC | Modifier::UNDERLINED,
+    );
 
-        $expectedString = sprintf(
-            'Style(fg:%s,bg: %s,u:%s,+mod:%d,-mod:%d)',
-            '-',
-            AnsiColor::Red->debugName(),
-            AnsiColor::Blue->debugName(),
-            Modifier::BOLD,
-            Modifier::ITALIC | Modifier::UNDERLINED,
-        );
-
-        self::assertEquals($expectedString, (string) $style);
-    }
-}
+    expect((string) $style)->toBe($expectedString);
+});

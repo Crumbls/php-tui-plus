@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Docgen\Renderer;
+namespace Crumbls\Docgen\Renderer;
 
-use PhpTui\Docgen\DocRenderer;
+use Crumbls\Docgen\DocRenderer;
 use RuntimeException;
 
 final class AggregateDocRenderer implements DocRenderer

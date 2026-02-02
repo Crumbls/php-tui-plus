@@ -2,86 +2,44 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Math;
+use Crumbls\Tui\Math\VectorUtil;
 
-use Generator;
-use PhpTui\Tui\Math\VectorUtil;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
+test('max with empty array', function (): void {
+    expect(VectorUtil::max([]))->toBeNull();
+});
 
-final class VectorUtilTest extends TestCase
-{
-    /**
-     * @param list<number> $vector
-     * @param int|float|null $expected
-     */
-    #[DataProvider('provideMax')]
-    public function testMax(array $vector, mixed $expected): void
-    {
-        self::assertEquals($expected, VectorUtil::max($vector));
-    }
+test('max with single int', function (): void {
+    expect(VectorUtil::max([1]))->toBe(1);
+});
 
-    /**
-     * @param list<number> $vector
-     * @param int|float|null $expected
-     */
-    #[DataProvider('provideMin')]
-    public function testMin(array $vector, mixed $expected): void
-    {
-        self::assertEquals($expected, VectorUtil::min($vector));
-    }
+test('max with single float', function (): void {
+    expect(VectorUtil::max([1.2]))->toBe(1.2);
+});
 
-    /**
-     * @return Generator<array{list<number>,number|null}>
-     */
-    public static function provideMax(): Generator
-    {
-        yield [
-            [],
-            null
-        ];
-        yield [
-            [1],
-            1,
-        ];
-        yield [
-            [1.2],
-            1.2,
-        ];
-        yield [
-            [1.2,3.4],
-            3.4,
-        ];
-        yield [
-            [6,1,3],
-            6
-        ];
-    }
+test('max with two floats', function (): void {
+    expect(VectorUtil::max([1.2, 3.4]))->toBe(3.4);
+});
 
-    /**
-     * @return Generator<array{list<number>,number|null}>
-     */
-    public static function provideMin(): Generator
-    {
-        yield [
-            [],
-            null
-        ];
-        yield [
-            [1],
-            1,
-        ];
-        yield [
-            [1.2],
-            1.2,
-        ];
-        yield [
-            [1.2,3.4],
-            1.2,
-        ];
-        yield [
-            [6,1,3],
-            1
-        ];
-    }
-}
+test('max with multiple ints', function (): void {
+    expect(VectorUtil::max([6, 1, 3]))->toBe(6);
+});
+
+test('min with empty array', function (): void {
+    expect(VectorUtil::min([]))->toBeNull();
+});
+
+test('min with single int', function (): void {
+    expect(VectorUtil::min([1]))->toBe(1);
+});
+
+test('min with single float', function (): void {
+    expect(VectorUtil::min([1.2]))->toBe(1.2);
+});
+
+test('min with two floats', function (): void {
+    expect(VectorUtil::min([1.2, 3.4]))->toBe(1.2);
+});
+
+test('min with multiple ints', function (): void {
+    expect(VectorUtil::min([6, 1, 3]))->toBe(1);
+});

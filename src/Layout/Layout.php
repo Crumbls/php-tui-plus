@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Layout;
+namespace Crumbls\Tui\Layout;
 
-use PhpTui\Tui\Bridge\Cassowary\CassowaryConstraintSolver;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Areas;
-use PhpTui\Tui\Widget\Direction;
-use PhpTui\Tui\Widget\Margin;
+use Crumbls\Tui\Bridge\Cassowary\CassowaryConstraintSolver;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Areas;
+use Crumbls\Tui\Widget\Direction;
+use Crumbls\Tui\Widget\Margin;
 
 final class Layout
 {

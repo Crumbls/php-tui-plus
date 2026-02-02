@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\TabsWidget;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Text\Span;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\TabsWidget;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Line;
+use Crumbls\Tui\Text\Span;
 
 require 'vendor/autoload.php';
 

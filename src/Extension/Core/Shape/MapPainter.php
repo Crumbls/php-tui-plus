@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Shape;
+namespace Crumbls\Tui\Extension\Core\Shape;
 
-use PhpTui\Tui\Canvas\Painter;
-use PhpTui\Tui\Canvas\Shape;
-use PhpTui\Tui\Canvas\ShapePainter;
-use PhpTui\Tui\Position\FloatPosition;
+use Crumbls\Tui\Canvas\Painter;
+use Crumbls\Tui\Canvas\Shape;
+use Crumbls\Tui\Canvas\ShapePainter;
+use Crumbls\Tui\Position\FloatPosition;
 
 final class MapPainter implements ShapePainter
 {

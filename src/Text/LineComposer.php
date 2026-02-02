@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Text;
+namespace Crumbls\Tui\Text;
 
 use Generator;
-use PhpTui\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\HorizontalAlignment;
 
 interface LineComposer
 {

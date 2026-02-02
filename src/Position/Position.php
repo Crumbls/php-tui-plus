@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Position;
+namespace Crumbls\Tui\Position;
 
 use Closure;
 use OutOfBoundsException;
-use PhpTui\Tui\Display\Area;
+use Crumbls\Tui\Display\Area;
 use RuntimeException;
 use Stringable;
 

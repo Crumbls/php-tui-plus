@@ -2,29 +2,22 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Text;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Span;
 
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Span;
-use PHPUnit\Framework\TestCase;
+test('to styled graphemes', function (): void {
+    $span = Span::fromString('Hello')->blue();
 
-final class SpanTest extends TestCase
-{
-    public function testToStyledGraphemes(): void
-    {
-        $span = Span::fromString('Hello')->blue();
+    $baseStyle = Style::default()->fg(AnsiColor::Red);
+    $styledGraphemes = $span->toStyledGraphemes($baseStyle);
 
-        $baseStyle = Style::default()->fg(AnsiColor::Red);
-        $styledGraphemes = $span->toStyledGraphemes($baseStyle);
+    expect($styledGraphemes)->toHaveCount(5);
 
-        self::assertCount(5, $styledGraphemes);
-
-        foreach ($styledGraphemes as $i => $grapheme) {
-            self::assertEquals(AnsiColor::Blue, $grapheme->style->fg);
-            self::assertEquals($span->content[$i], $grapheme->symbol);
-        }
-
-        self::assertEquals(AnsiColor::Red, $baseStyle->fg);
+    foreach ($styledGraphemes as $i => $grapheme) {
+        expect($grapheme->style->fg)->toBe(AnsiColor::Blue);
+        expect($grapheme->symbol)->toBe($span->content[$i]);
     }
-}
+
+    expect($baseStyle->fg)->toBe(AnsiColor::Red);
+});

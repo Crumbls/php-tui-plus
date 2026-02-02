@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Math;
+namespace Crumbls\Tui\Math;
 
 final class VectorUtil
 {

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas;
+namespace Crumbls\Tui\Canvas;
 
-use PhpTui\Tui\Canvas\Grid\BrailleGrid;
-use PhpTui\Tui\Canvas\Grid\CharGrid;
-use PhpTui\Tui\Canvas\Grid\HalfBlockGrid;
-use PhpTui\Tui\Extension\Core\Widget\Chart\AxisBounds;
-use PhpTui\Tui\Position\FloatPosition;
-use PhpTui\Tui\Symbol\BarSet;
-use PhpTui\Tui\Symbol\BlockSet;
-use PhpTui\Tui\Symbol\Symbols;
-use PhpTui\Tui\Text\Line;
+use Crumbls\Tui\Canvas\Grid\BrailleGrid;
+use Crumbls\Tui\Canvas\Grid\CharGrid;
+use Crumbls\Tui\Canvas\Grid\HalfBlockGrid;
+use Crumbls\Tui\Extension\Core\Widget\Chart\AxisBounds;
+use Crumbls\Tui\Position\FloatPosition;
+use Crumbls\Tui\Symbol\BarSet;
+use Crumbls\Tui\Symbol\BlockSet;
+use Crumbls\Tui\Symbol\Symbols;
+use Crumbls\Tui\Text\Line;
 
 final class CanvasContext
 {

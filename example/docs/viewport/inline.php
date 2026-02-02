@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use PhpTui\Term\Event\CursorPositionEvent;
-use PhpTui\Term\EventProvider\ArrayEventProvider;
-use PhpTui\Term\RawMode\TestRawMode;
-use PhpTui\Term\Terminal;
-use PhpTui\Tui\Bridge\PhpTerm\PhpTermBackend;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\BlockWidget;
-use PhpTui\Tui\Extension\Core\Widget\GridWidget;
-use PhpTui\Tui\Layout\Constraint;
-use PhpTui\Tui\Text\Title;
-use PhpTui\Tui\Widget\Borders;
+use Crumbls\Term\Event\CursorPositionEvent;
+use Crumbls\Term\EventProvider\ArrayEventProvider;
+use Crumbls\Term\RawMode\TestRawMode;
+use Crumbls\Term\Terminal;
+use Crumbls\Tui\Bridge\PhpTerm\PhpTermBackend;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\BlockWidget;
+use Crumbls\Tui\Extension\Core\Widget\GridWidget;
+use Crumbls\Tui\Layout\Constraint;
+use Crumbls\Tui\Text\Title;
+use Crumbls\Tui\Widget\Borders;
 
 require 'vendor/autoload.php';
 

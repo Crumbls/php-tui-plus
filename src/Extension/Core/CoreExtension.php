@@ -2,29 +2,36 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core;
+namespace Crumbls\Tui\Extension\Core;
 
-use PhpTui\Tui\Display\DisplayExtension;
-use PhpTui\Tui\Extension\Core\Shape\CirclePainter;
-use PhpTui\Tui\Extension\Core\Shape\ClosurePainter;
-use PhpTui\Tui\Extension\Core\Shape\LinePainter;
-use PhpTui\Tui\Extension\Core\Shape\MapPainter;
-use PhpTui\Tui\Extension\Core\Shape\PointsPainter;
-use PhpTui\Tui\Extension\Core\Shape\RectanglePainter;
-use PhpTui\Tui\Extension\Core\Shape\SpritePainter;
-use PhpTui\Tui\Extension\Core\Widget\BarChartRenderer;
-use PhpTui\Tui\Extension\Core\Widget\BlockRenderer;
-use PhpTui\Tui\Extension\Core\Widget\BufferWidgetRenderer;
-use PhpTui\Tui\Extension\Core\Widget\ChartRenderer;
-use PhpTui\Tui\Extension\Core\Widget\CompositeRenderer;
-use PhpTui\Tui\Extension\Core\Widget\GaugeRenderer;
-use PhpTui\Tui\Extension\Core\Widget\GridRenderer;
-use PhpTui\Tui\Extension\Core\Widget\ListRenderer;
-use PhpTui\Tui\Extension\Core\Widget\ParagraphRenderer;
-use PhpTui\Tui\Extension\Core\Widget\ScrollbarRenderer;
-use PhpTui\Tui\Extension\Core\Widget\SparklineRenderer;
-use PhpTui\Tui\Extension\Core\Widget\TableRenderer;
-use PhpTui\Tui\Extension\Core\Widget\TabsRenderer;
+use Crumbls\Tui\Display\DisplayExtension;
+use Crumbls\Tui\Extension\Core\Shape\CirclePainter;
+use Crumbls\Tui\Extension\Core\Shape\ClosurePainter;
+use Crumbls\Tui\Extension\Core\Shape\LinePainter;
+use Crumbls\Tui\Extension\Core\Shape\MapPainter;
+use Crumbls\Tui\Extension\Core\Shape\PointsPainter;
+use Crumbls\Tui\Extension\Core\Shape\RectanglePainter;
+use Crumbls\Tui\Extension\Core\Shape\SpritePainter;
+use Crumbls\Tui\Extension\Core\Widget\BarChartRenderer;
+use Crumbls\Tui\Extension\Core\Widget\BlockRenderer;
+use Crumbls\Tui\Extension\Core\Widget\BufferWidgetRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ChartRenderer;
+use Crumbls\Tui\Extension\Core\Widget\CompositeRenderer;
+use Crumbls\Tui\Extension\Core\Widget\DataTableRenderer;
+use Crumbls\Tui\Extension\Core\Widget\GaugeRenderer;
+use Crumbls\Tui\Extension\Core\Widget\GridRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ListRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ParagraphRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ScrollbarRenderer;
+use Crumbls\Tui\Extension\Core\Widget\SelectableTableRenderer;
+use Crumbls\Tui\Extension\Core\Widget\SelectRenderer;
+use Crumbls\Tui\Extension\Core\Widget\SparklineRenderer;
+use Crumbls\Tui\Extension\Core\Widget\TableRenderer;
+use Crumbls\Tui\Extension\Core\Widget\TabsRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ModalRenderer;
+use Crumbls\Tui\Extension\Core\Widget\StatusBarRenderer;
+use Crumbls\Tui\Extension\Core\Widget\TextInputRenderer;
+use Crumbls\Tui\Extension\Core\Widget\TreeRenderer;
 
 final class CoreExtension implements DisplayExtension
 {
@@ -57,6 +64,13 @@ final class CoreExtension implements DisplayExtension
             new CompositeRenderer(),
             new TabsRenderer(),
             new SparklineRenderer(),
+            new SelectableTableRenderer(),
+            new SelectRenderer(),
+            new TextInputRenderer(),
+            new ModalRenderer(),
+            new StatusBarRenderer(),
+            new TreeRenderer(),
+            new DataTableRenderer(),
         ];
     }
 }

@@ -2,93 +2,74 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Unit\Extension\Core\Widget;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\TabsWidget;
+use Crumbls\Tui\Text\Line;
 
-use Generator;
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\TabsWidget;
-use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Widget\Widget;
+test('zero tabs', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(20, 2));
+    render($buffer, TabsWidget::default());
 
-final class TabsRendererTest extends WidgetTestCase
-{
-    /**
-     * @dataProvider provideTableRender
-     * @param array<int,string> $expected
-     */
-    public function testTableRender(Area $area, Widget $widget, array $expected): void
-    {
-        $buffer = Buffer::empty($area);
-        $this->render($buffer, $widget);
-        self::assertEquals($expected, $buffer->toLines());
-    }
-    /**
-     * @return Generator<array{Area,Widget,list<string>}>
-     */
-    public static function provideTableRender(): Generator
-    {
-        yield 'zero tabs' => [
-            Area::fromDimensions(20, 2),
-            TabsWidget::default(),
-            [
-                '                    ',
-                '                    ',
-            ]
-           ,
-        ];
-        yield 'one tab' => [
-            Area::fromDimensions(20, 2),
-            TabsWidget::default()
-                ->titles(
-                    Line::fromString('Tab 1'),
-                ),
-            [
-                ' Tab 1              ',
-                '                    ',
-            ]
-           ,
-        ];
-        yield 'two tabs' => [
-            Area::fromDimensions(20, 2),
-            TabsWidget::default()
-                ->titles(
-                    Line::fromString('Tab 1'),
-                    Line::fromString('Tab 2'),
-                ),
-            [
-                ' Tab 1 │ Tab 2      ',
-                '                    ',
-            ]
-           ,
-        ];
-        yield 'select tabs' => [
-            Area::fromDimensions(20, 2),
-            TabsWidget::default()
-                ->select(1)
-                ->titles(
-                    Line::fromString('Tab 1'),
-                    Line::fromString('Tab 2'),
-                ),
-            [
-                ' Tab 1 │ Tab 2      ',
-                '                    ',
-            ]
-           ,
-        ];
-        yield 'select out of range' => [
-            Area::fromDimensions(20, 2),
-            TabsWidget::default()
-                ->select(100)
-                ->titles(
-                    Line::fromString('Tab 1'),
-                    Line::fromString('Tab 2'),
-                ),
-            [
-                ' Tab 1 │ Tab 2      ',
-                '                    ',
-            ]
-           ,
-        ];
-    }
-}
+    expect($buffer->toLines())->toEqual([
+        '                    ',
+        '                    ',
+    ]);
+});
+
+test('one tab', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(20, 2));
+    render($buffer, TabsWidget::default()
+        ->titles(
+            Line::fromString('Tab 1'),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        ' Tab 1              ',
+        '                    ',
+    ]);
+});
+
+test('two tabs', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(20, 2));
+    render($buffer, TabsWidget::default()
+        ->titles(
+            Line::fromString('Tab 1'),
+            Line::fromString('Tab 2'),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        ' Tab 1 │ Tab 2      ',
+        '                    ',
+    ]);
+});
+
+test('select tabs', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(20, 2));
+    render($buffer, TabsWidget::default()
+        ->select(1)
+        ->titles(
+            Line::fromString('Tab 1'),
+            Line::fromString('Tab 2'),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        ' Tab 1 │ Tab 2      ',
+        '                    ',
+    ]);
+});
+
+test('select out of range', function (): void {
+    $buffer = Buffer::empty(Area::fromDimensions(20, 2));
+    render($buffer, TabsWidget::default()
+        ->select(100)
+        ->titles(
+            Line::fromString('Tab 1'),
+            Line::fromString('Tab 2'),
+        ));
+
+    expect($buffer->toLines())->toEqual([
+        ' Tab 1 │ Tab 2      ',
+        '                    ',
+    ]);
+});

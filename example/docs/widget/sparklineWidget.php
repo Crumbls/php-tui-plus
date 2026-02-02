@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\SparklineWidget;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\SparklineWidget;
 
 require 'vendor/autoload.php';
 

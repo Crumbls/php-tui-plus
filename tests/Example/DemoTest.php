@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Tests\Example;
+namespace Crumbls\Tui\Tests\Example;
 
 use PhpTui\Term\Event;
 use PhpTui\Term\Event\CharKeyEvent;
@@ -11,8 +11,8 @@ use PhpTui\Term\InformationProvider\AggregateInformationProvider;
 use PhpTui\Term\Painter\ArrayPainter;
 use PhpTui\Term\RawMode\TestRawMode;
 use PhpTui\Term\Terminal;
-use PhpTui\Tui\Display\Backend\DummyBackend;
-use PhpTui\Tui\Example\Demo\App;
+use Crumbls\Tui\Display\Backend\DummyBackend;
+use Crumbls\Tui\Example\Demo\App;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 

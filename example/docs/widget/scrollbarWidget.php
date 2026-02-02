@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
-use PhpTui\Tui\Extension\Core\Widget\ScrollbarWidget;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Extension\Core\Widget\Scrollbar\ScrollbarState;
+use Crumbls\Tui\Extension\Core\Widget\ScrollbarWidget;
 
 require 'vendor/autoload.php';
 

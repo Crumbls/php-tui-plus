@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Shape;
+namespace Crumbls\Tui\Extension\Core\Shape;
 
 use Closure;
-use PhpTui\Tui\Canvas\Painter;
-use PhpTui\Tui\Canvas\Shape;
+use Crumbls\Tui\Canvas\Painter;
+use Crumbls\Tui\Canvas\Shape;
 
 /**
  * Shape that can write directly to the Painter context

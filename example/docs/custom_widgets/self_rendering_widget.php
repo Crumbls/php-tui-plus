@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\DisplayBuilder;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\DisplayBuilder;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 require 'vendor/autoload.php';
 

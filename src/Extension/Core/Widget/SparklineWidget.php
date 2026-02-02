@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Extension\Core\Widget\Sparkline\RenderDirection;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Widget\Widget;
 
 /**
  * Widget to render a sparkline over one or more lines.

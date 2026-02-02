@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas\Grid;
+namespace Crumbls\Tui\Canvas\Grid;
 
 use IntlChar;
-use PhpTui\Tui\Canvas\CanvasGrid;
-use PhpTui\Tui\Canvas\Layer;
-use PhpTui\Tui\Canvas\Resolution;
-use PhpTui\Tui\Color\AnsiColor;
-use PhpTui\Tui\Color\Color;
-use PhpTui\Tui\Color\FgBgColor;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Symbol\BrailleSet;
+use Crumbls\Tui\Canvas\CanvasGrid;
+use Crumbls\Tui\Canvas\Layer;
+use Crumbls\Tui\Canvas\Resolution;
+use Crumbls\Tui\Color\AnsiColor;
+use Crumbls\Tui\Color\Color;
+use Crumbls\Tui\Color\FgBgColor;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Symbol\BrailleSet;
 
 final class BrailleGrid extends CanvasGrid
 {

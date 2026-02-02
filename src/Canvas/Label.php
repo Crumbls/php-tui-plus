@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Canvas;
+namespace Crumbls\Tui\Canvas;
 
-use PhpTui\Tui\Position\FloatPosition;
-use PhpTui\Tui\Text\Line;
+use Crumbls\Tui\Position\FloatPosition;
+use Crumbls\Tui\Text\Line;
 
 final class Label
 {

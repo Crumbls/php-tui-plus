@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Widget;
+namespace Crumbls\Tui\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
 
 interface WidgetRenderer
 {

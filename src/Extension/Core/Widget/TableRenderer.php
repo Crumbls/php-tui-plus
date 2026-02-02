@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Display\Area;
-use PhpTui\Tui\Display\Buffer;
-use PhpTui\Tui\Extension\Core\Widget\Table\TableCell;
-use PhpTui\Tui\Layout\Constraint;
-use PhpTui\Tui\Layout\Layout;
-use PhpTui\Tui\Position\Position;
-use PhpTui\Tui\Widget\Direction;
-use PhpTui\Tui\Widget\HorizontalAlignment;
-use PhpTui\Tui\Widget\Widget;
-use PhpTui\Tui\Widget\WidgetRenderer;
+use Crumbls\Tui\Display\Area;
+use Crumbls\Tui\Display\Buffer;
+use Crumbls\Tui\Extension\Core\Widget\Table\TableCell;
+use Crumbls\Tui\Layout\Constraint;
+use Crumbls\Tui\Layout\Layout;
+use Crumbls\Tui\Position\Position;
+use Crumbls\Tui\Widget\Direction;
+use Crumbls\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\Widget;
+use Crumbls\Tui\Widget\WidgetRenderer;
 
 final class TableRenderer implements WidgetRenderer
 {

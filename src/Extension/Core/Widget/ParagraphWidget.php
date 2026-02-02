@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\Core\Widget;
+namespace Crumbls\Tui\Extension\Core\Widget;
 
-use PhpTui\Tui\Extension\Core\Widget\Paragraph\Wrap;
-use PhpTui\Tui\Style\Style;
-use PhpTui\Tui\Text\Line;
-use PhpTui\Tui\Text\Span;
-use PhpTui\Tui\Text\Text;
-use PhpTui\Tui\Widget\HorizontalAlignment;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Extension\Core\Widget\Paragraph\Wrap;
+use Crumbls\Tui\Style\Style;
+use Crumbls\Tui\Text\Line;
+use Crumbls\Tui\Text\Span;
+use Crumbls\Tui\Text\Text;
+use Crumbls\Tui\Widget\HorizontalAlignment;
+use Crumbls\Tui\Widget\Widget;
 
 /**
  * This widget has the ability to show and wrap text.

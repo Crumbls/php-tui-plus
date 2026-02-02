@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PhpTui\Tui\Extension\ImageMagick\Widget;
+namespace Crumbls\Tui\Extension\ImageMagick\Widget;
 
-use PhpTui\Tui\Canvas\Marker;
-use PhpTui\Tui\Widget\Widget;
+use Crumbls\Tui\Canvas\Marker;
+use Crumbls\Tui\Widget\Widget;
 use RuntimeException;
 
 /**
