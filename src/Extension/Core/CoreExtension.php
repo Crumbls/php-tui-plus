@@ -17,6 +17,7 @@ use Crumbls\Tui\Extension\Core\Widget\BlockRenderer;
 use Crumbls\Tui\Extension\Core\Widget\BufferWidgetRenderer;
 use Crumbls\Tui\Extension\Core\Widget\ChartRenderer;
 use Crumbls\Tui\Extension\Core\Widget\CompositeRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ContextPanelRenderer;
 use Crumbls\Tui\Extension\Core\Widget\DataTableRenderer;
 use Crumbls\Tui\Extension\Core\Widget\GaugeRenderer;
 use Crumbls\Tui\Extension\Core\Widget\GridRenderer;
@@ -32,6 +33,8 @@ use Crumbls\Tui\Extension\Core\Widget\ModalRenderer;
 use Crumbls\Tui\Extension\Core\Widget\StatusBarRenderer;
 use Crumbls\Tui\Extension\Core\Widget\TextInputRenderer;
 use Crumbls\Tui\Extension\Core\Widget\TreeRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ProgressBarRenderer;
+use Crumbls\Tui\Extension\Core\Widget\ToastRenderer;
 
 final class CoreExtension implements DisplayExtension
 {
@@ -71,6 +74,9 @@ final class CoreExtension implements DisplayExtension
             new StatusBarRenderer(),
             new TreeRenderer(),
             new DataTableRenderer(),
+            new ContextPanelRenderer(),
+            new ProgressBarRenderer(),
+            new ToastRenderer(),
         ];
     }
 }
